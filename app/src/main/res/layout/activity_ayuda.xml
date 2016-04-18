@@ -1,0 +1,62 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".presentacion.vista.MainActivity">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:id="@+id/cabecera">
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scaleType="fitCenter"
+                    android:id="@+id/iconoConfig"
+                    android:src="@drawable/volver"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false"
+                    android:onClick="volver" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/logo"
+                    android:src="@drawable/logo"
+                    android:layout_gravity="center" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/iconoAyuda"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/cuerpo"
+                android:layout_below="@+id/cabecera"
+                android:gravity="center_horizontal">
+
+                <it.sephiroth.android.library.imagezoom.ImageViewTouch
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ayuda_main"
+                    android:id="@+id/imageView" />
+            </LinearLayout>
+</RelativeLayout>

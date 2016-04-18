@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">AS_USUARIO</string>
+    <string name="action_settings">Settings</string>
+    <string name="colorAzul">Azul</string>
+    <string name="colorRojo">Rojo</string>
+    <string name="colorRosa">Rosa</string>
+    <string name="colorVerde">Verde</string>
+    <string name="colorNegro">Negro</string>
+    <string name="tonoUno">Tono 1</string>
+    <string name="tonoDos">Tono 2</string>
+    <string name="tonoTres">Tono 3</string>
+    <string name="tonoCuatro">Tono 4</string>
+    <string name="tonoCinco">Tono 5</string>
+
+
+    <string-array name="aColores">
+        <item>Azul</item>
+        <item>Rojo</item>
+        <item>Rosa</item>
+        <item>Verde</item>
+        <item>Negro</item>
+    </string-array>
+    <string-array name="aTonos">
+        <item>Tono 1</item>
+        <item>Tono 2</item>
+        <item>Tono 3</item>
+        <item>Tono 4</item>
+        <item>Tono 5</item>
+    </string-array>
+
+</resources>
