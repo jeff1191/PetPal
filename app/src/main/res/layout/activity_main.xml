@@ -57,121 +57,87 @@
         android:gravity="center_horizontal">
 
         <!-- Nombre -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/nombreUser"
+            android:id="@+id/tituloInicio"
             android:gravity="center"
             android:textStyle="bold"
-            android:text="Nombre"
+            android:text="Bienvenido a PET PAL!"
             android:textAlignment="center" />
 
         <!-- Avatar -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4.5"
-            android:paddingBottom="5dp"
-            android:id="@+id/avatar"
-            android:src="@drawable/avatar"
-            android:gravity="center" />
 
         <!-- Fila puntuacion -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="0.75"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/imgYPunt"
-            android:gravity="center">
-
-            <!-- Espacio -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="center" />
-
-            <!-- Puntuacion icono -->
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.75"
-                android:id="@+id/puntuacionImg"
-                android:scaleType="fitCenter"
-                android:src="@drawable/puntuacion"
-                android:gravity="center" />
-
-            <!-- Puntuacion texto -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/puntuacionUsuario"
-                android:gravity="center"
-                android:text="10/10"
-                android:textAlignment="center" />
-
-            <!-- Espacio -->
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:gravity="center" />
-
-        </LinearLayout>
 
         <!-- Botones -->
-        <Button
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="¿Cómo vas?"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/informe"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:onClick="verInforme"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="1dp" />
+            android:layout_weight="1"></LinearLayout>
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="Próximos eventos"
-            android:id="@+id/eventos"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:onClick="verEventos"
-            android:layout_marginBottom="1dp" />
+            android:layout_weight="3"
+            android:id="@+id/botones">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="Reto"
-            android:id="@+id/reto"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:singleLine="false"
-            android:onClick="verReto"
-            android:layout_marginBottom="1dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/"
+                android:layout_weight="0.5"></LinearLayout>
 
-        <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Ver red social"
+                    android:id="@+id/button"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"></LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Crear publicacion"
+                    android:id="@+id/button2"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"></LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="Enviar informe por correo"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/correo"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:onClick="enviarCorreo"
-            android:layout_marginBottom="1dp" />
+            android:layout_weight="1"></LinearLayout>
 
     </LinearLayout>
 

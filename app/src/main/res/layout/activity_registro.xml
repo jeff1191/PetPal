@@ -12,29 +12,41 @@
             android:layout_width="match_parent"
             android:paddingTop="20dp"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:id="@+id/imageView3"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
 
-        <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"></LinearLayout>
+
+    <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Registro"
-            android:id="@+id/tituloRegistro"
+            android:text="Inicio"
+            android:id="@+id/tituloInicio"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/blue" />
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="0.25"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
         android:orientation="vertical"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp">
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -57,18 +69,15 @@
             android:id="@+id/emailRegistro"
             android:hint="Email" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="text"
-            android:ems="10"
-            android:textColor="@color/blue"
-            android:id="@+id/claveRegistro"
-            android:hint="Clave tutor" />
     </LinearLayout>
-        <Button
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"></LinearLayout>
+
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -80,7 +89,11 @@
             android:textColor="@color/white"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:onClick="realizarRegistro" />
+        android:onClick="realizarRegistro" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"></LinearLayout>
 </LinearLayout>
