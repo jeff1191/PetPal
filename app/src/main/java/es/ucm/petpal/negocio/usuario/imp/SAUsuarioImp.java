@@ -7,17 +7,14 @@ package es.ucm.petpal.negocio.usuario.imp;
 import android.content.Intent;
 import android.net.Uri;
 
-import es.ucm.petpal.negocio.usuario.SAUsuario;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.List;
+
 import es.ucm.petpal.integracion.DBHelper;
-import es.ucm.petpal.negocio.factoria.FactoriaSA;
-import es.ucm.petpal.negocio.post.SAPost;
+import es.ucm.petpal.negocio.usuario.SAUsuario;
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.negocio.usuario.Usuario;
 import es.ucm.petpal.presentacion.vista.Contexto;
@@ -55,36 +52,6 @@ public class SAUsuarioImp implements SAUsuario {
 	
 	public void sincronizar() {
 		
-	}
-
-	/*
-	puntuacion = (10 * nºtareas positivas / nº tareas totales
-	* */
-	@Override
-	public Integer calcularPuntuacion() {
-	/*	Integer ret;
-		// Se cogen las tareas de la BBDD
-		SASuceso ss = FactoriaSA.getInstancia().nuevoSASuceso();
-		List<TransferTarea> tareas = ss.consultarTareas();
-		// Se cuentan las positivas y se realiza el calculo
-		int positivas = 0;
-		for (int i = 0; i < tareas.size(); i++)
-			if (tareas.get(i).getNumSi() - tareas.get(i).getNumNo() >= 0)
-				positivas++;
-		ret = 10*positivas/tareas.size();
-		// Se actualiza la puntuacion en la BBDD
-		Dao<Usuario, Integer> daoUsuario;
-		try {
-			daoUsuario = getHelper().getUsuarioDao();
-			Usuario usuario = daoUsuario.queryForId(1);
-			usuario.setPuntuacionAnterior(usuario.getPuntuacion());
-			usuario.setPuntuacion(ret);
-			daoUsuario.update(usuario);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return ret;*/
-		return 0;
 	}
 
 	@Override

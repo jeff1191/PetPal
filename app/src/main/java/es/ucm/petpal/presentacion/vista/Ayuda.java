@@ -3,14 +3,11 @@ package es.ucm.petpal.presentacion.vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import es.ucm.petpal.R;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
-import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
 /**
  * Created by msalitu on 08/03/2016.
@@ -23,7 +20,7 @@ public class Ayuda extends Activity{
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_ayuda);
-        Bundle bundle = getIntent().getExtras();
+       /* Bundle bundle = getIntent().getExtras();
         String pantalla = bundle.getString("pantalla");
         mImage = (ImageViewTouch)findViewById(R.id.imageView);
 
@@ -70,7 +67,7 @@ public class Ayuda extends Activity{
             case "activity_informe":
                 mImage.setImageResource(R.drawable.ayuda_main);
                 break;
-        }
+        }*/
     }
 
     public void volver(View v){

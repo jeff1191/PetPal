@@ -3,9 +3,8 @@ package es.ucm.petpal.presentacion.controlador.comandos.factoria.imp;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 import es.ucm.petpal.presentacion.controlador.comandos.Command;
 import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.petpal.presentacion.controlador.comandos.imp.CargarBBDDComando;
-import es.ucm.petpal.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.ConfiguracionComando;
+import es.ucm.petpal.presentacion.controlador.comandos.imp.ConsultarUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EnviarCorreoComando;
@@ -34,9 +33,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
-                break;
-            case ListaComandos.CARGAR_BBDD:
-                ret = new CargarBBDDComando();
                 break;
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();

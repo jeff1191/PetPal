@@ -8,8 +8,6 @@ public interface SAUsuario {
 
 	public void sincronizar();
 
-	Integer calcularPuntuacion();
-
 	void crearUsuario(TransferUsuario transferUsuario);
 
 	TransferUsuario consultarUsuario();

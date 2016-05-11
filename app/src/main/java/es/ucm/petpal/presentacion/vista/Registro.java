@@ -2,10 +2,8 @@ package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,10 +12,6 @@ import es.ucm.petpal.R;
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
-import es.ucm.petpal.presentacion.controlador.comandos.Command;
-import es.ucm.petpal.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
-import es.ucm.petpal.presentacion.notificaciones.ServicioNotificaciones;
 
 /**
  * Created by Juan Lu on 15/03/2016.
@@ -26,7 +20,6 @@ public class Registro extends Activity {
 
     private EditText nombreUsuario;
     private EditText correoUsuario;
-    private EditText claveUsuario;
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     @Override
@@ -36,7 +29,6 @@ public class Registro extends Activity {
         setContentView(R.layout.activity_registro);
         nombreUsuario = (EditText) findViewById(R.id.nombreRegistro);
         correoUsuario = (EditText) findViewById(R.id.emailRegistro);
-        claveUsuario = (EditText) findViewById(R.id.claveRegistro);
     }
 
     public void realizarRegistro(View v){
@@ -45,9 +37,8 @@ public class Registro extends Activity {
         //Leer los datos del "fomulario"
         String nombre = String.valueOf(nombreUsuario.getText());
         String correo = String.valueOf(correoUsuario.getText());
-        String clave = String.valueOf(claveUsuario.getText());
 
-        if(datosValidos(nombre,correo,clave)){
+        if(datosValidos(nombre,correo)){
             TransferUsuario crearUsuario = new TransferUsuario();
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
@@ -57,8 +48,7 @@ public class Registro extends Activity {
             crearUsuario.setCorreo(correo);
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CARGAR_BBDD, null);
-            startService(new Intent(this, ServicioNotificaciones.class));
+           // startService(new Intent(this, ServicioNotificaciones.class));
             
             startActivity(new Intent(this, MainActivity.class));
     }
@@ -73,11 +63,10 @@ public class Registro extends Activity {
 
     }
 
-    private boolean datosValidos(String nombre, String correo, String clave) {
+    private boolean datosValidos(String nombre, String correo) {
         ////////////////////FALTARIA VALIDAR EL CÓDIGO //////////////////////////
         if(!nombre.toString().matches("") &&
-                !correo.toString().matches("")&&
-                !clave.toString().matches("")) {
+                !correo.toString().matches("")) {
 
             if(correo.toString().matches(PATRON_EMAIL)){
                     return true;

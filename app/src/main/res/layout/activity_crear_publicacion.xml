@@ -1,97 +1,179 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_weight="1"
     tools:context=".presentacion.vista.MainActivity">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:id="@+id/cabecera">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:id="@+id/cabecera">
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:id="@+id/iconoConfig"
+            android:src="@drawable/volver"
+            android:layout_gravity="center"
+            android:onClick="volver"
+            android:clickable="true"
+            android:focusableInTouchMode="false" />
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/iconoConfig"
-                    android:src="@drawable/volver"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:focusableInTouchMode="false"
-                    android:onClick="volver" />
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:id="@+id/logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo"
+            android:layout_gravity="center" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:scaleType="fitCenter"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/logo"
-                    android:src="@drawable/logo"
-                    android:layout_gravity="center" />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:id="@+id/iconoAyuda"
+            android:src="@drawable/ayuda"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:onClick="ayuda" />
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/iconoAyuda"
-                    android:src="@drawable/ayuda"
-                    android:scaleType="fitCenter"
-                    android:layout_gravity="center"
-                    android:clickable="true"/>
+    </LinearLayout>
 
-            </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/cuerpo"
+        android:layout_below="@+id/cabecera"
+        android:gravity="center_horizontal">
 
+        <!-- Titulo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tituloNuevaPublicacion"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Nueva publicacion"/>
+
+        <!-- Avatar -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/newImagenPost"
+            android:src="@drawable/avatar"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:onClick="nuevaImagenPost"
+            android:layout_weight="4" />
+
+        <!-- Nombre usuario editable -->
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:inputType="textPersonName"
+            android:text="nombreActual"
+            android:id="@+id/editarNombre"
+            android:ems="10"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/editarAvatar"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:editable="true"
+            android:layout_marginTop="10dp" />
+
+        <!-- Seccion color y tono -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:id="@+id/fondoTono"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- Color -->
             <LinearLayout
                 android:orientation="vertical"
+                android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/cuerpo"
-                android:layout_below="@+id/cabecera"
-                android:gravity="center_horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp">
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:text="Color"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center" />
+
+                <Spinner
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.25"></LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:id="@+id/tituloCrear">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:id="@+id/tituloCrearPublicacion"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:text="Nueva publicacion"
-                            android:textAlignment="center"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.25"></LinearLayout>
+                    android:id="@+id/cambiarColor"
+                    style="@style/spinnerItemStyle"
+                    android:layout_gravity="center"/>
             </LinearLayout>
+
+            <!-- Tono -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:text="Tono"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    />
+
+                <Spinner
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/cambiarTono"
+                    style="@style/spinnerItemStyle"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Aceptar"
+            android:id="@+id/envioNuevaConfig"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="20dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>

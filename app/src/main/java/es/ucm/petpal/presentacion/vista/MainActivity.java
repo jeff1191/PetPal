@@ -3,9 +3,7 @@ package es.ucm.petpal.presentacion.vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,12 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.ucm.petpal.R;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
-import es.ucm.petpal.presentacion.controlador.comandos.Command;
-import es.ucm.petpal.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 
 public class MainActivity extends Activity {
@@ -94,25 +88,38 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
+        Intent pantallaConfig = new Intent (getApplicationContext(), Configuracion.class);
+        startActivity(pantallaConfig);
     }
 
     public void ayuda(View v) {
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+       // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Intent pantallaAyuda = new Intent (getApplicationContext(), Ayuda.class);
+        startActivity(pantallaAyuda);
+    }
+
+    public void verRedSocial(View v) {
+        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Intent pantallaWebView = new Intent (getApplicationContext(), PetPalWebView.class);
+        startActivity(pantallaWebView);
+    }
+
+    public void verPerfil(View v) {
+        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Intent pantallaAyuda = new Intent (getApplicationContext(), Configuracion.class);
+        startActivity(pantallaAyuda);
+    }
+
+    public void nuevoPost(View v) {
+        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
+        Intent pantallaCrearPost = new Intent (getApplicationContext(), NuevoPost.class);
+        startActivity(pantallaCrearPost);
     }
 
     public void verInforme(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
-    }
-
-    public void verEventos(View v){
-       Controlador.getInstancia().ejecutaComando(ListaComandos.VER_EVENTOS, null);
-    }
-
-    public void verReto(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_RETO, null);
     }
 
     public void enviarCorreo(View v){

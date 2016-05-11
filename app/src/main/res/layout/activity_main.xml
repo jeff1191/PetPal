@@ -26,7 +26,7 @@
             android:focusableInTouchMode="false" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/logo"
@@ -61,7 +61,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="0.5"></LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="0.5"></LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -96,7 +96,6 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/"
                 android:layout_weight="0.5"></LinearLayout>
 
             <LinearLayout
@@ -110,19 +109,38 @@
                     android:layout_height="0dp"
                     android:text="Ver red social"
                     android:id="@+id/button"
+                    android:onClick="verRedSocial"
+                    android:clickable="true"
                     android:layout_weight="1" />
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"></LinearLayout>
+                    android:layout_weight="0.75"></LinearLayout>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Crear publicacion"
                     android:id="@+id/button2"
+                    android:onClick="nuevoPost"
+                    android:clickable="true"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.75"></LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Ver mi perfil"
+                    android:id="@+id/button3"
+                    android:onClick="verPerfil"
+                    android:clickable="true"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -137,7 +155,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></LinearLayout>
+            android:layout_weight="0.75"></LinearLayout>
 
     </LinearLayout>
 

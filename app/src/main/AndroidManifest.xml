@@ -39,13 +39,11 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <activity android:name=".presentacion.vista.VerReto" />
-
-        <activity android:name=".presentacion.vista.VerEventos" />
-
         <activity android:name=".presentacion.vista.Ayuda" />
 
-        <activity android:name=".presentacion.vista.VerInforme" />
+        <activity android:name=".presentacion.vista.NuevoPost" />
+
+        <activity android:name=".presentacion.vista.PetPalWebView" />
 
         <activity android:name=".presentacion.vista.Registro"
             android:windowSoftInputMode="adjustPan">

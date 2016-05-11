@@ -5,46 +5,46 @@
     android:layout_weight="1"
     tools:context=".presentacion.vista.MainActivity">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_width="fill_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:id="@+id/cabecera">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:id="@+id/cabecera">
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/iconoConfig"
-                    android:src="@drawable/volver"
-                    android:layout_gravity="center"
-                    android:onClick="volver"
-                    android:clickable="true"
-                    android:focusableInTouchMode="false" />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:id="@+id/iconoConfig"
+            android:src="@drawable/volver"
+            android:layout_gravity="center"
+            android:onClick="volver"
+            android:clickable="true"
+            android:focusableInTouchMode="false" />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:id="@+id/logo"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/logo"
-                    android:layout_gravity="center" />
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_weight="1"
+            android:id="@+id/logo"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo"
+            android:layout_gravity="center" />
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:id="@+id/iconoAyuda"
-                    android:src="@drawable/ayuda"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:onClick="ayuda" />
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:id="@+id/iconoAyuda"
+            android:src="@drawable/ayuda"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:onClick="ayuda" />
 
-            </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"

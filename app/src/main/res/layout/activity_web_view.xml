@@ -53,10 +53,9 @@
                 android:layout_below="@+id/cabecera"
                 android:gravity="center_horizontal">
 
-                <it.sephiroth.android.library.imagezoom.ImageViewTouch
+                <WebView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ayuda_main"
-                    android:id="@+id/imageView" />
+                    android:id="@+id/webView" />
             </LinearLayout>
 </RelativeLayout>

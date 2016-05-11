@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -31,9 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.petpal.R;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
-import es.ucm.petpal.presentacion.controlador.Controlador;
-import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
  * Clase asociada a la vista de activity_configuracion
@@ -71,16 +67,16 @@ public class Configuracion extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_configuracion);
-        Bundle bundle = getIntent().getExtras();
+        /*Bundle bundle = getIntent().getExtras();
         editarNombre = (EditText)findViewById(R.id.editarNombre);
         aceptar = (Button)findViewById(R.id.envioNuevaConfig);
-        spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
-        spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
-        imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         tonoParcial=tonoActual;
         temaActual=bundle.getString("temaConfiguracion");
         temaParcial=temaActual;
-        rutaImagen=bundle.getString("imagenConfiguracion");
+        rutaImagen=bundle.getString("imagenConfiguracion");*/
+        imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
+        spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
+        spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         ////////Spinner color ///////
         nombresColoresSistema();
         ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
@@ -158,7 +154,7 @@ public class Configuracion extends Activity {
             }
         });
         ////////////////////////////////////////////////////
-        if(!bundle.getString("imagenConfiguracion").equals(""))
+        /*if(!bundle.getString("imagenConfiguracion").equals(""))
             imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("imagenConfiguracion")));
         else
             imagenConfiguracion.setImageResource(R.drawable.avatar);
@@ -188,7 +184,7 @@ public class Configuracion extends Activity {
                 }
 
             }
-        });
+        });*/
 
 
     }
@@ -260,7 +256,9 @@ public class Configuracion extends Activity {
     }
 
     public void ayuda(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "configuracion");
+        //  Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "configuracion");
+        Intent pantallaAyuda = new Intent (getApplicationContext(), Ayuda.class);
+        startActivity(pantallaAyuda);
     }
 
     public void cambiarImagenPerfil(View v) {
