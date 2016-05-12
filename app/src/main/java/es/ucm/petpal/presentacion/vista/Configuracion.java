@@ -76,7 +76,6 @@ public class Configuracion extends Activity {
         rutaImagen=bundle.getString("imagenConfiguracion");*/
         imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
         spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
-        spinnerTono = (Spinner) findViewById(R.id.cambiarTono);
         ////////Spinner color ///////
         nombresColoresSistema();
         ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
@@ -111,43 +110,6 @@ public class Configuracion extends Activity {
                         break;
                 }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        //////////////Spinner tonos///////////////////
-        nombresTonosSistema();
-        ArrayAdapter<String> adapter_tonos = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, nombresTonos);
-        adapter_tonos
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTono.setAdapter(adapter_tonos);
-        spinnerTono.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerTono.setSelection(position);
-                String selState = (String) spinnerTono.getSelectedItem();
-                String tonoSeleccionado = (String) spinnerTono.getSelectedItem();
-                switch (tonoSeleccionado){
-                    case "Tono 1":
-                        tonoParcial="tono1";
-                        break;
-                    case "Tono 2":
-                        tonoParcial="tono2";
-                        break;
-                    case "Tono 3":
-                        tonoParcial="tono3";
-                        break;
-                    case "Tono 4":
-                        tonoParcial="tono4";
-                        break;
-                    case "Tono 5":
-                        tonoParcial="tono5";
-                        break;
-                }
-            }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

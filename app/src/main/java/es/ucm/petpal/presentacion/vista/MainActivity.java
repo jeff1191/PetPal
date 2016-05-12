@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
+        cargarTema();
         // Se accede a los datos del usuario de la BBDD
 /*        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
         }
         // Completa los datos del usuario que se muestran en esta pantalla
         Configuracion.temaActual = usuario.getColor();
-        cargarTema();
+        //cargarTema();
 
         nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
         nombrePrincipal.setText(usuario.getNombre());
@@ -107,7 +108,7 @@ public class MainActivity extends Activity {
 
     public void verPerfil(View v) {
         // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
-        Intent pantallaAyuda = new Intent (getApplicationContext(), Configuracion.class);
+        Intent pantallaAyuda = new Intent (getApplicationContext(), VerPerfil.class);
         startActivity(pantallaAyuda);
     }
 

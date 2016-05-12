@@ -56,123 +56,121 @@
         android:gravity="center_horizontal">
 
         <!-- Titulo -->
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/tituloNuevaPublicacion"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:text="Nueva publicacion"/>
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:fillViewport="true"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/tituloNuevaPublicacion"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="Nueva publicacion"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/newImagenPost"
+                    android:src="@drawable/avatar"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:onClick="nuevaImagenPost"
+                    android:layout_weight="4" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:inputType="text"
+                    android:text="Nuevo titulo"
+                    android:id="@+id/nuevoTitulo"
+                    android:ems="13"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/editarAvatar"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:editable="true"
+                    android:layout_marginTop="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/nuevaUbicacion"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:ems="13"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:editable="true"
+                    android:inputType="text"
+                    android:text="Nueva ubicación" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:id="@+id/nuevoContacto"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:editable="true"
+                    android:ems="13"
+                    android:inputType="text"
+                    android:text="Nuevo dato contacto" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:inputType="textMultiLine"
+                        android:ems="13"
+                        android:id="@+id/nuevaDescripcion"
+                        android:lines="4"
+                        android:text="Nueva descripcion"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:editable="true"
+                        android:gravity="top" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Aceptar"
+                    android:id="@+id/envioNuevaConfig"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+        </ScrollView>
 
         <!-- Avatar -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/newImagenPost"
-            android:src="@drawable/avatar"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:onClick="nuevaImagenPost"
-            android:layout_weight="4" />
 
         <!-- Nombre usuario editable -->
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:inputType="textPersonName"
-            android:text="nombreActual"
-            android:id="@+id/editarNombre"
-            android:ems="10"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/editarAvatar"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:editable="true"
-            android:layout_marginTop="10dp" />
 
         <!-- Seccion color y tono -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:id="@+id/fondoTono"
-            android:layout_weight="1.5"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp">
-
-            <!-- Color -->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:text="Color"
-                    android:textStyle="bold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center" />
-
-                <Spinner
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:id="@+id/cambiarColor"
-                    style="@style/spinnerItemStyle"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-            <!-- Tono -->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:text="Tono"
-                    android:textStyle="bold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center"
-                    />
-
-                <Spinner
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:id="@+id/cambiarTono"
-                    style="@style/spinnerItemStyle"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Aceptar"
-            android:id="@+id/envioNuevaConfig"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="20dp" />
 
     </LinearLayout>
 
