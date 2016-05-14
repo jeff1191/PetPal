@@ -116,23 +116,11 @@
                     android:inputType="text"
                     android:text="Nueva ubicación" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:id="@+id/nuevoContacto"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:editable="true"
-                    android:ems="13"
-                    android:inputType="text"
-                    android:text="Nuevo dato contacto" />
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2">
+                    android:layout_weight="3">
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -140,7 +128,7 @@
                         android:inputType="textMultiLine"
                         android:ems="13"
                         android:id="@+id/nuevaDescripcion"
-                        android:lines="4"
+                        android:lines="7"
                         android:text="Nueva descripcion"
                         android:layout_weight="1"
                         android:layout_marginTop="10dp"
