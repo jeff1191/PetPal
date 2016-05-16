@@ -43,9 +43,7 @@ public class Registro extends Activity {
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
             crearUsuario.setColor("AS_theme_azul");
-            crearUsuario.setPuntuacion(0);
-            crearUsuario.setPuntuacionAnterior(0);
-            crearUsuario.setCorreo(correo);
+            crearUsuario.setEmail(correo);
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
            // startService(new Intent(this, ServicioNotificaciones.class));

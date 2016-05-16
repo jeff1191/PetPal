@@ -83,8 +83,6 @@ public class SAPostImp implements SAPost {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
         TransferUsuario usuario = saUsuario.consultarUsuario();
         String name = usuario.getNombre();
-        Integer puntuacion = usuario.getPuntuacion();
-        Integer puntuacionAnterior = usuario.getPuntuacionAnterior();
 
         Document document = new Document();
         File f = crearFichero(NOMBRE_DOCUMENTO);
@@ -113,8 +111,6 @@ public class SAPostImp implements SAPost {
         document.add(new Paragraph("\n", paragraphFont));
         PdfPTable table = new PdfPTable(2);
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell("Anterior\n" + puntuacionAnterior );
-        table.addCell("Actual\n" + puntuacion);
 
             /*///////////////////////Se me resiste el tam de la flechita///////////////////////////////
         // Flecha roja

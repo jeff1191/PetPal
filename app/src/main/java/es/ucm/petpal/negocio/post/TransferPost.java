@@ -1,10 +1,8 @@
 package es.ucm.petpal.negocio.post;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-
-import java.sql.Timestamp;
 import java.util.Date;
+
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
 
 
 /**
@@ -13,20 +11,14 @@ import java.util.Date;
 public class TransferPost {
 
     private Integer id;
-    private String textoAlarma;
-    private String textoFecha;
-    private Date horaAlarma;
-    private Integer asistencia;
+    private String titulo;
+    private String ubicacion;
+    private String descripcion;
+    private String imagen;
+    private Date fecha;
+    private TransferUsuario usuario;
 
     public TransferPost(){    }
-
-    public TransferPost(Integer id, String textoAlarma, String textoFecha, Date horaAlarma,Integer asistencia){
-        this.id = id;
-        this.textoAlarma = textoAlarma;
-        this.textoFecha = textoFecha;
-        this.horaAlarma = horaAlarma;
-        this.asistencia= asistencia;
-    }
 
     public Integer getId() {
         return id;
@@ -36,35 +28,52 @@ public class TransferPost {
         this.id = id;
     }
 
-    public String getTextoAlarma() {
-        return textoAlarma;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTextoAlarma(String textoAlarma) {
-        this.textoAlarma = textoAlarma;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public Date getHoraAlarma() {
-        return horaAlarma;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setHoraAlarma(Date horaAlarma) {
-        this.horaAlarma = horaAlarma;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
-    public String getTextoFecha() {
-        return textoFecha;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setTextoFecha(String textoFecha) {
-        this.textoFecha = textoFecha;
-    }
-    public void setAsistencia(int asistencia) {
-        this.asistencia = asistencia;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public Integer getAsistencia() {
-        return asistencia;
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public TransferUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(TransferUsuario usuario) {
+        this.usuario = usuario;
     }
 }
 

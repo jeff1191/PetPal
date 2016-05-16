@@ -50,14 +50,9 @@ public class DispatcherImp extends Dispatcher {
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
                 Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
                 hayUsuario.putExtra("nombre", transferUsuario.getNombre());
-                hayUsuario.putExtra("correo", transferUsuario.getCorreo());
+                hayUsuario.putExtra("correo", transferUsuario.getEmail());
                 hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                hayUsuario.putExtra("puntuacion", transferUsuario.getPuntuacion());
-                hayUsuario.putExtra("puntuacionAnterior", transferUsuario.getPuntuacionAnterior());
                 hayUsuario.putExtra("color", transferUsuario.getColor());
-                hayUsuario.putExtra("tono", transferUsuario.getTono());
-                hayUsuario.putExtra("nombre tutor", transferUsuario.getNombreTutor());
-                hayUsuario.putExtra("correo tutor", transferUsuario.getCorreoTutor());
                 Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 

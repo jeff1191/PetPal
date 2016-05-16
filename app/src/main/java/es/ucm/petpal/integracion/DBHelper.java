@@ -10,9 +10,6 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-import es.ucm.petpal.negocio.post.Post;
-import es.ucm.petpal.negocio.usuario.Usuario;
-
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "as_user.db";

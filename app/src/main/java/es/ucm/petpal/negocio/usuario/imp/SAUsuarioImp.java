@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import es.ucm.petpal.integracion.DBHelper;
 import es.ucm.petpal.negocio.usuario.SAUsuario;
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
-import es.ucm.petpal.negocio.usuario.Usuario;
+import es.ucm.petpal.integracion.Usuario;
 import es.ucm.petpal.presentacion.vista.Contexto;
 
 public class SAUsuarioImp implements SAUsuario {
@@ -40,7 +40,6 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.setNombre(datos.getNombre());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
-				usuario.setTono(datos.getTono());
 				daoUsuario.update(usuario);
 			}else
 				return null;
@@ -69,33 +68,11 @@ public class SAUsuarioImp implements SAUsuario {
 			else
 				usuario.setNombre("Usuario");
 
-			if (transferUsuario.getCorreo() != null)
-				usuario.setCorreo(transferUsuario.getCorreo());
-
 			if (transferUsuario.getAvatar() != null)
 				usuario.setAvatar(transferUsuario.getAvatar());
 
-			if (transferUsuario.getPuntuacion() != null)
-				usuario.setPuntuacion(transferUsuario.getPuntuacion());
-			else
-				usuario.setPuntuacion(0);
-
-			if (transferUsuario.getPuntuacionAnterior() != null)
-				usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
-			else
-				usuario.setPuntuacionAnterior(0);
-
 			if (transferUsuario.getColor() != null)
 				usuario.setColor(transferUsuario.getColor());
-
-			if (transferUsuario.getTono() != null)
-				usuario.setTono(transferUsuario.getTono());
-
-			if (transferUsuario.getNombreTutor() != null)
-				usuario.setNombreTutor(transferUsuario.getNombreTutor());
-
-			if (transferUsuario.getCorreoTutor() != null)
-				usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
 
 			// se crea la fila en la tabla de la BBDD
 			daoUsuario.create(usuario);
@@ -122,22 +99,12 @@ public class SAUsuarioImp implements SAUsuario {
 				transferUsuario.setId(u.getId());
 				if (u.getNombre() != null)
 					transferUsuario.setNombre(u.getNombre());
-				if (u.getCorreo() != null)
-					transferUsuario.setCorreo(u.getCorreo());
+				if (u.getEmail() != null)
+					transferUsuario.setEmail(u.getEmail());
 				if (u.getAvatar() != null)
 					transferUsuario.setAvatar(u.getAvatar());
-				if (u.getPuntuacion() != null)
-					transferUsuario.setPuntuacion(u.getPuntuacion());
-				if (u.getPuntuacionAnterior() != null)
-					transferUsuario.setPuntuacionAnterior(u.getPuntuacionAnterior());
 				if (u.getColor() != null)
 					transferUsuario.setColor(u.getColor());
-				if (u.getTono() != null)
-					transferUsuario.setTono(u.getTono());
-				if (u.getNombreTutor() != null)
-					transferUsuario.setNombreTutor(u.getNombreTutor());
-				if (u.getCorreoTutor() != null)
-					transferUsuario.setCorreoTutor(u.getCorreoTutor());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,7 +121,7 @@ public class SAUsuarioImp implements SAUsuario {
 		try {
 			daoUsuario = getHelper().getUsuarioDao();
 			Usuario u = daoUsuario.queryForId(1);
-			mail= u.getCorreo();
+			mail= u.getEmail();
 			name = u.getNombre();
 		} catch (SQLException e) {
 			e.printStackTrace();
