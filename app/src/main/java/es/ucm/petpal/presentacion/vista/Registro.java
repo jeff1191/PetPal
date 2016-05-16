@@ -39,11 +39,15 @@ public class Registro extends Activity {
         String correo = String.valueOf(correoUsuario.getText());
 
         if(datosValidos(nombre,correo)){
+            //Borrar esto de abajo y meter el usuario de la web view
             TransferUsuario crearUsuario = new TransferUsuario();
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
             crearUsuario.setColor("AS_theme_azul");
             crearUsuario.setEmail(correo);
+            crearUsuario.setApellidos("López");
+            crearUsuario.setCiudad("Madrid");
+            crearUsuario.setTelefono(111222333);
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
            // startService(new Intent(this, ServicioNotificaciones.class));

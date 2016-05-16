@@ -3,9 +3,13 @@
  */
 package es.ucm.petpal.negocio.usuario;
 
+import java.io.Serializable;
+
 import es.ucm.petpal.integracion.Usuario;
 
-public class TransferUsuario {
+public class TransferUsuario implements Serializable {
+
+	static final long serialVersionUID = 1L;
 
 	private Integer id;
 

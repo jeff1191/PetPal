@@ -38,7 +38,7 @@ public class Bienvenido extends Activity {
            @Override
            public void run() {
                Intent mainIntent = new Intent().setClass(
-                       Bienvenido.this, MainActivity.class);
+                       Bienvenido.this, Decision.class);
                startActivity(mainIntent);
                finish();
            }

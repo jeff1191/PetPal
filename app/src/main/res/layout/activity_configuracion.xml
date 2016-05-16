@@ -81,7 +81,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/editarAvatar"
+                    android:id="@+id/imagenConfig"
                     android:src="@drawable/avatar"
                     android:layout_gravity="center"
                     android:clickable="true"
@@ -171,8 +171,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="nombreActual"
-                        android:id="@+id/nuevoNombre"
+                        android:id="@+id/nombreConfig"
                         android:ems="10"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentEnd="true"
@@ -220,9 +219,8 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText"
-                        android:layout_weight="2"
-                        android:text="apellidosActual" />
+                        android:id="@+id/apellidosConfig"
+                        android:layout_weight="2" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -263,9 +261,8 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText2"
-                        android:layout_weight="2"
-                        android:text="ciudadActual" />
+                        android:id="@+id/ciudadConfig"
+                        android:layout_weight="2" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -306,9 +303,8 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText3"
-                        android:layout_weight="2"
-                        android:text="telefonoActual" />
+                        android:id="@+id/telefonoConfig"
+                        android:layout_weight="2" />
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -349,9 +345,8 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText4"
-                        android:layout_weight="2"
-                        android:text="emailActual" />
+                        android:id="@+id/emailConfig"
+                        android:layout_weight="2" />
 
                     <LinearLayout
                         android:orientation="horizontal"

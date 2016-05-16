@@ -8,6 +8,8 @@ import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 
 public interface SAPost {
-    public String generarPDF() throws IOException, DocumentException;
+    String generarPDF() throws IOException, DocumentException;
+
+    void crearPost(TransferPost transferPost);
 
 }

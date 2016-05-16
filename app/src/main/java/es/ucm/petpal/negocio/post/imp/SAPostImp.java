@@ -28,6 +28,7 @@ import es.ucm.petpal.R;
 import es.ucm.petpal.integracion.DBHelper;
 import es.ucm.petpal.negocio.factoria.FactoriaSA;
 import es.ucm.petpal.negocio.post.SAPost;
+import es.ucm.petpal.negocio.post.TransferPost;
 import es.ucm.petpal.negocio.usuario.SAUsuario;
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.vista.Contexto;
@@ -211,5 +212,10 @@ public class SAPostImp implements SAPost {
     document.close();
     return f.getAbsolutePath();
 }
+
+    @Override
+    public void crearPost(TransferPost transferPost) {
+
+    }
 
 }

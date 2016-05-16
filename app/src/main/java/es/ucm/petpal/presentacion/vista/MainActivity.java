@@ -89,38 +89,24 @@ public class MainActivity extends Activity {
     }
 
     public void personalizacion(View v){
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
-        Intent pantallaConfig = new Intent (getApplicationContext(), Configuracion.class);
-        startActivity(pantallaConfig);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONFIGURACION, null);
     }
 
     public void ayuda(View v) {
-       // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
-        Intent pantallaAyuda = new Intent (getApplicationContext(), Ayuda.class);
-        startActivity(pantallaAyuda);
+       Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
     }
 
     public void verRedSocial(View v) {
-        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
-        Intent pantallaWebView = new Intent (getApplicationContext(), PetPalWebView.class);
-        startActivity(pantallaWebView);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_WEB_VIEW, null);
     }
 
     public void verPerfil(View v) {
-        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
-        Intent pantallaAyuda = new Intent (getApplicationContext(), VerPerfil.class);
-        startActivity(pantallaAyuda);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO, null);
     }
 
     public void nuevoPost(View v) {
-        // Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "principal");
         Intent pantallaCrearPost = new Intent (getApplicationContext(), NuevoPost.class);
         startActivity(pantallaCrearPost);
-    }
-
-    public void verInforme(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_INFORME, null);
     }
 
     public void enviarCorreo(View v){

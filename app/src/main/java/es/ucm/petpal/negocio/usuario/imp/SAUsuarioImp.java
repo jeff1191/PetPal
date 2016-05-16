@@ -62,22 +62,15 @@ public class SAUsuarioImp implements SAUsuario {
 
 			Usuario usuario = new Usuario();
 
-			// actualizamos los valores del nuevo usuario con los introducidos o por defecto
-			if (transferUsuario.getNombre() != null)
-				usuario.setNombre(transferUsuario.getNombre());
-			else
-				usuario.setNombre("Usuario");
+			usuario.setNombre(transferUsuario.getNombre());
+			usuario.setApellidos(transferUsuario.getApellidos());
+			usuario.setAvatar(transferUsuario.getAvatar());
+			usuario.setCiudad(transferUsuario.getCiudad());
+			usuario.setTelefono(transferUsuario.getTelefono());
+			usuario.setEmail(transferUsuario.getEmail());
+			usuario.setColor(transferUsuario.getColor());
 
-			if (transferUsuario.getAvatar() != null)
-				usuario.setAvatar(transferUsuario.getAvatar());
-
-			if (transferUsuario.getColor() != null)
-				usuario.setColor(transferUsuario.getColor());
-
-			// se crea la fila en la tabla de la BBDD
 			daoUsuario.create(usuario);
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -99,10 +92,16 @@ public class SAUsuarioImp implements SAUsuario {
 				transferUsuario.setId(u.getId());
 				if (u.getNombre() != null)
 					transferUsuario.setNombre(u.getNombre());
-				if (u.getEmail() != null)
-					transferUsuario.setEmail(u.getEmail());
+				if (u.getApellidos() != null)
+					transferUsuario.setApellidos(u.getApellidos());
 				if (u.getAvatar() != null)
 					transferUsuario.setAvatar(u.getAvatar());
+				if (u.getTelefono() != null)
+					transferUsuario.setTelefono(u.getTelefono());
+				if (u.getCiudad() != null)
+					transferUsuario.setCiudad(u.getCiudad());
+				if (u.getEmail() != null)
+					transferUsuario.setEmail(u.getEmail());
 				if (u.getColor() != null)
 					transferUsuario.setColor(u.getColor());
 			}

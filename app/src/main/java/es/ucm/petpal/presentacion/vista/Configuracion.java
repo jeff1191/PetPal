@@ -30,6 +30,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.presentacion.controlador.Controlador;
+import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
  * Clase asociada a la vista de activity_configuracion
@@ -219,9 +221,7 @@ public class Configuracion extends Activity {
     }
 
     public void ayuda(View v){
-        //  Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "configuracion");
-        Intent pantallaAyuda = new Intent (getApplicationContext(), Ayuda.class);
-        startActivity(pantallaAyuda);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "configuracion");
     }
 
     public void cambiarImagenPerfil(View v) {

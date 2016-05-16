@@ -9,6 +9,8 @@ import es.ucm.petpal.presentacion.vista.Ayuda;
 import es.ucm.petpal.presentacion.vista.Configuracion;
 import es.ucm.petpal.presentacion.vista.Contexto;
 import es.ucm.petpal.presentacion.vista.MainActivity;
+import es.ucm.petpal.presentacion.vista.PetPalWebView;
+import es.ucm.petpal.presentacion.vista.VerPerfil;
 
 
 /**
@@ -43,27 +45,19 @@ public class DispatcherImp extends Dispatcher {
                 Contexto.getInstancia().getContext().startActivity(intentAyuda);
                 break;
 
-            case ListaComandos.CREAR_USUARIO:
-                break;
-
             case ListaComandos.CONSULTAR_USUARIO:
+                Intent usuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerPerfil.class);
                 TransferUsuario transferUsuario = (TransferUsuario)datos;
-                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                hayUsuario.putExtra("nombre", transferUsuario.getNombre());
-                hayUsuario.putExtra("correo", transferUsuario.getEmail());
-                hayUsuario.putExtra("avatar", transferUsuario.getAvatar());
-                hayUsuario.putExtra("color", transferUsuario.getColor());
-                Contexto.getInstancia().getContext().startActivity(hayUsuario);
+                usuario.putExtra("usuario", transferUsuario);
+                Contexto.getInstancia().getContext().startActivity(usuario);
                 break;
 
-            case ListaComandos.GENERAR_PDF:
-                break;
-
-            case ListaComandos.ENVIAR_CORREO:
+            case ListaComandos.CONSULTAR_WEB_VIEW:
+                Intent pantallaWebView = new Intent (Contexto.getInstancia().getContext().getApplicationContext(), PetPalWebView.class);
+                Contexto.getInstancia().getContext().startActivity(pantallaWebView);
                 break;
 
             default:
-
                 break;
         }
     }

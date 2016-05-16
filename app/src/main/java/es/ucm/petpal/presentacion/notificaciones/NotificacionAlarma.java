@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -58,7 +57,6 @@ public class NotificacionAlarma extends BroadcastReceiver {
                         .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.logo_notificacion))
                         .setContentIntent(aux)
-                        .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.silbido))
                         .setVibrate(new long[]{200, 300, 200, 300, 200})
                         .setLights(Color.YELLOW, 3000, 3000)
                         .setStyle(new NotificationCompat.BigTextStyle()

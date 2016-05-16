@@ -23,6 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.presentacion.controlador.Controlador;
+import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
  * Created by Juan Lu on 11/05/2016.
@@ -45,6 +47,9 @@ public class NuevoPost extends Activity {
         setContentView(R.layout.activity_crear_publicacion);
 
         imagenConfiguracion = (ImageView) findViewById(R.id.newImagenPost);
+
+        //TransferPost nuevoPost = new TransferPost();
+        //Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_POST, nuevoPost);
 
     }
 
@@ -75,9 +80,7 @@ public class NuevoPost extends Activity {
     }
 
     public void ayuda(View v){
-        //  Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "nuevoPost");
-        Intent pantallaAyuda = new Intent (getApplicationContext(), Ayuda.class);
-        startActivity(pantallaAyuda);
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "nuevoPost");
     }
 
     public void nuevaImagenPost(View v) {
