@@ -8,7 +8,6 @@ import es.ucm.petpal.presentacion.controlador.ListaComandos;
 import es.ucm.petpal.presentacion.vista.Ayuda;
 import es.ucm.petpal.presentacion.vista.Configuracion;
 import es.ucm.petpal.presentacion.vista.Contexto;
-import es.ucm.petpal.presentacion.vista.MainActivity;
 import es.ucm.petpal.presentacion.vista.PetPalWebView;
 import es.ucm.petpal.presentacion.vista.VerPerfil;
 
@@ -25,18 +24,8 @@ public class DispatcherImp extends Dispatcher {
             case ListaComandos.CONFIGURACION:
                 Intent intentConfiguracion = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Configuracion.class);
                 TransferUsuario conf = (TransferUsuario) datos;
-                intentConfiguracion.putExtra("nombreConfiguracion", conf.getNombre());
-                intentConfiguracion.putExtra("imagenConfiguracion", conf.getAvatar());
-                intentConfiguracion.putExtra("temaConfiguracion", conf.getColor());
+                intentConfiguracion.putExtra("usuarioConfig", conf);
                 Contexto.getInstancia().getContext().startActivity(intentConfiguracion);
-                break;
-
-            case ListaComandos.EDITAR_USUARIO:
-                Intent intentEditarUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class);
-                TransferUsuario editarUsuario = (TransferUsuario) datos;
-                intentEditarUsuario.putExtra("editarNombre", editarUsuario.getNombre());
-                intentEditarUsuario.putExtra("editarAvatar", editarUsuario.getAvatar());
-                Contexto.getInstancia().getContext().startActivity(intentEditarUsuario);
                 break;
 
             case ListaComandos.AYUDA:

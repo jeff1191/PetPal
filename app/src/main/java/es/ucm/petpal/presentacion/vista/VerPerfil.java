@@ -45,35 +45,35 @@ public class VerPerfil extends Activity{
             TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuario");
 
             if (usuario != null) {
-                if (usuario.getNombre() != null)
+                if (usuario.getNombre() != null && !usuario.getNombre().equals(""))
                     nombreTV.setText(usuario.getNombre());
                 else {
                     nombreTV.setTypeface(null, Typeface.ITALIC);
                     nombreTV.setText("nombre no disponible");
                 }
 
-                if (usuario.getApellidos() != null)
+                if (usuario.getApellidos() != null && !usuario.getApellidos().equals(""))
                     apellidosTV.setText(usuario.getApellidos());
                 else {
                     apellidosTV.setTypeface(null, Typeface.ITALIC);
                     apellidosTV.setText("apellidos no disponibles");
                 }
 
-                if (usuario.getCiudad() != null)
+                if (usuario.getCiudad() != null && !usuario.getCiudad().equals(""))
                     ciudadTV.setText(usuario.getCiudad());
                 else {
                     ciudadTV.setTypeface(null, Typeface.ITALIC);
                     ciudadTV.setText("ciudad no disponible");
                 }
 
-                if (usuario.getTelefono() != null)
+                if (usuario.getTelefono() != null && usuario.getTelefono() != 0)
                     telefonoTV.setText(usuario.getTelefono()+"");
                 else {
                     telefonoTV.setTypeface(null, Typeface.ITALIC);
                     telefonoTV.setText("telefono no disponible");
                 }
 
-                if (usuario.getEmail() != null)
+                if (usuario.getEmail() != null && !usuario.getEmail().equals(""))
                     emailTV.setText(usuario.getEmail());
                 else {
                     emailTV.setTypeface(null, Typeface.ITALIC);

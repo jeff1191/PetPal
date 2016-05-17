@@ -40,6 +40,10 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.setNombre(datos.getNombre());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
+				usuario.setCiudad(datos.getCiudad());
+				usuario.setTelefono(datos.getTelefono());
+				usuario.setApellidos(datos.getApellidos());
+				usuario.setEmail(datos.getEmail());
 				daoUsuario.update(usuario);
 			}else
 				return null;

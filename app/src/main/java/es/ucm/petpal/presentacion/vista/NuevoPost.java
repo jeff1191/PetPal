@@ -14,7 +14,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.negocio.post.TransferPost;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
@@ -35,9 +40,13 @@ public class NuevoPost extends Activity {
     private static final int SELECCIONAR_GALERIA = 2;
     private static final int CAMARA = 1;
 
-    static String temaActual="AS_theme_azul";
-    private ImageView imagenConfiguracion;
+    private ImageView imagenPost;
     private String rutaImagen="";
+
+    private TextView tituloTV;
+    private TextView ubicacionTV;
+    private TextView descripcionTV;
+    private Button guardarPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +55,56 @@ public class NuevoPost extends Activity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_crear_publicacion);
 
-        imagenConfiguracion = (ImageView) findViewById(R.id.newImagenPost);
+        imagenPost = (ImageView) findViewById(R.id.imagenPost);
+        tituloTV = (TextView) findViewById(R.id.tituloPost);
+        ubicacionTV = (TextView) findViewById(R.id.ubicacionPost);
+        descripcionTV = (TextView) findViewById(R.id.descripcionPost);
+        guardarPost = (Button) findViewById(R.id.guardarPost);
+        final String tituloP = String.valueOf(tituloTV.getText());
+        final String ubicacionP = String.valueOf(ubicacionTV.getText());
+        final String descripcionP = String.valueOf(descripcionTV.getText());
 
-        //TransferPost nuevoPost = new TransferPost();
-        //Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_POST, nuevoPost);
+        guardarPost.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tituloP = String.valueOf(tituloTV.getText());
+                String ubicacionP = String.valueOf(ubicacionTV.getText());
+                String descripcionP = String.valueOf(descripcionTV.getText());
+
+                if(datosPostValidos(tituloP, ubicacionP, descripcionP)){
+                    TransferPost nuevoPost = new TransferPost();
+                    nuevoPost.setTitulo(tituloP);
+                    nuevoPost.setDescripcion(descripcionP);
+                    nuevoPost.setUbicacion(ubicacionP);
+                    nuevoPost.setImagen(rutaImagen);
+                    Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_POST, nuevoPost);
+                    Toast.makeText(getApplicationContext(), "El post ha sido creado con éxito", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent (Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class));
+                }
+            }
+        });
 
     }
 
+    public boolean datosPostValidos(String titulo, String ubicacion, String descripcion){
+
+        if(!titulo.toString().matches("") && !ubicacion.toString().matches("") && !descripcion.toString().matches(""))
+            return true;
+        else
+            mostrarMensajeError("Algún campo es vacío");
+
+        return false;
+    }
+
+    private void mostrarMensajeError(String msg){
+        Toast errorNombre =
+                Toast.makeText(getApplicationContext(),
+                        msg, Toast.LENGTH_SHORT);
+        errorNombre.show();
+    }
+
     public void cargarTema(){
-        switch (temaActual){
+        switch (Configuracion.temaActual){
             case "AS_theme_azul":
                 setTheme(R.style.AS_tema_azul);
                 break;
@@ -101,7 +151,7 @@ public class NuevoPost extends Activity {
                             Intent.createChooser(intent, "Select File"),
                             SELECCIONAR_GALERIA);
                 } else if (items[item].equals("Imagen por defecto")) {
-                    imagenConfiguracion.setImageResource(R.drawable.avatar);
+                    imagenPost.setImageResource(R.drawable.avatar);
                     rutaImagen = "";
                     dialog.dismiss();
                 }
@@ -131,7 +181,7 @@ public class NuevoPost extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                imagenConfiguracion.setImageBitmap(imagen);
+                imagenPost.setImageBitmap(imagen);
                 rutaImagen = destination.getPath();
             } else if (requestCode == SELECCIONAR_GALERIA) {
                 Uri selectedImageUri = data.getData();
@@ -154,7 +204,7 @@ public class NuevoPost extends Activity {
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
                 bm = BitmapFactory.decodeFile(selectedImagePath, options);
-                imagenConfiguracion.setImageBitmap(bm);
+                imagenPost.setImageBitmap(bm);
                 rutaImagen=selectedImagePath;
             }
         }

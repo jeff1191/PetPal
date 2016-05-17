@@ -81,7 +81,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/newImagenPost"
+                    android:id="@+id/imagenPost"
                     android:src="@drawable/avatar"
                     android:layout_gravity="center"
                     android:clickable="true"
@@ -92,8 +92,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:inputType="text"
-                    android:text="Nuevo titulo"
-                    android:id="@+id/nuevoTitulo"
+                    android:hint="Nuevo titulo"
+                    android:id="@+id/tituloPost"
                     android:ems="13"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentEnd="true"
@@ -106,7 +106,7 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:id="@+id/nuevaUbicacion"
+                    android:id="@+id/ubicacionPost"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:ems="13"
@@ -114,7 +114,7 @@
                     android:layout_marginTop="10dp"
                     android:editable="true"
                     android:inputType="text"
-                    android:text="Nueva ubicación" />
+                    android:hint="Nueva ubicación" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -127,9 +127,9 @@
                         android:layout_height="fill_parent"
                         android:inputType="textMultiLine"
                         android:ems="13"
-                        android:id="@+id/nuevaDescripcion"
+                        android:id="@+id/descripcionPost"
                         android:lines="7"
-                        android:text="Nueva descripcion"
+                        android:hint="Nueva descripcion"
                         android:layout_weight="1"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:text="Aceptar"
-                    android:id="@+id/envioNuevaConfig"
+                    android:id="@+id/guardarPost"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:paddingLeft="20dp"

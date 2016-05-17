@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
+import es.ucm.petpal.presentacion.controlador.comandos.Command;
+import es.ucm.petpal.presentacion.controlador.comandos.exceptions.commandException;
+import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 
 public class MainActivity extends Activity {
@@ -25,10 +30,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_main);
-        cargarTema();
-        // Se accede a los datos del usuario de la BBDD
-/*        Controlador.getInstancia().ejecutaComando(ListaComandos.ACTUALIZAR_PUNTUACION, null);
         Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario usuario = new TransferUsuario();
         try {
@@ -38,30 +39,13 @@ public class MainActivity extends Activity {
         }
         // Completa los datos del usuario que se muestran en esta pantalla
         Configuracion.temaActual = usuario.getColor();
-        //cargarTema();
-
-        nombrePrincipal=(TextView)findViewById(R.id.nombreUser);
-        nombrePrincipal.setText(usuario.getNombre());
-        puntuacion = (TextView)findViewById(R.id.puntuacionUsuario);
-        puntuacion.setText(usuario.getPuntuacion()+"/10");
-        imagenPerfil= (ImageView) findViewById(R.id.avatar);
-        if(usuario.getAvatar() != null && !usuario.getAvatar().equals(""))
-            imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
-        else
-            imagenPerfil.setImageResource(R.drawable.avatar);
-
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            if (bundle.getString("editarUsuario") != null)
-                nombrePrincipal.setText(bundle.getString("editarUsuario"));
-            if (bundle.getString("editarAvatar") != null && !bundle.getString("editarAvatar").equals(""))
-                imagenPerfil.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("editarAvatar")));
-        }
+        cargarTema();
+        setContentView(R.layout.activity_main);
 
         // Esto es para solventar un error al enviar el correo
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-*/
+
         super.onCreate(savedInstanceState);
 
     }
@@ -105,8 +89,8 @@ public class MainActivity extends Activity {
     }
 
     public void nuevoPost(View v) {
-        Intent pantallaCrearPost = new Intent (getApplicationContext(), NuevoPost.class);
-        startActivity(pantallaCrearPost);
+        Contexto.getInstancia().getContext().startActivity(new Intent(
+                Contexto.getInstancia().getContext().getApplicationContext(), NuevoPost.class));
     }
 
     public void enviarCorreo(View v){

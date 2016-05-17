@@ -19,9 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
@@ -43,24 +43,19 @@ public class Configuracion extends Activity {
     private static final int REQUEST_IMAGE_CAPTURE =3;
     private static final int SELECCIONAR_GALERIA = 2;
     private static final int CAMARA = 1;
+    private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private EditText editarNombre;
+    private EditText editarApellidos;
+    private EditText editarCiudad;
+    private EditText editarTelefono;
+    private EditText editarEmail;
     private Button aceptar;
-    private Button color;
-    private Button tono;
-    private RadioButton diaria;
-    private RadioButton semanal;
-    private RadioButton mensual;
-    private RadioGroup rdgGrupo;
-    static String temaActual="AS_theme_azul";
-    static String tonoActual="tono1";
+    static String temaActual;
     private String[] nombresColores={ "Azul", "Rojo", "Rosa", "Verde",
             "Negro"};
-    private String[] nombresTonos = { "Tono 1", "Tono 2", "Tono 3", "Tono 4",
-            "Tono 5"};
     private Spinner spinnerColors;
-    private Spinner spinnerTono;
     private String temaParcial;
-    private String tonoParcial;
     private ImageView imagenConfiguracion;
     private String rutaImagen="";
     @Override
@@ -69,109 +64,139 @@ public class Configuracion extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_configuracion);
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        /*Bundle bundle = getIntent().getExtras();
-        editarNombre = (EditText)findViewById(R.id.editarNombre);
-        aceptar = (Button)findViewById(R.id.envioNuevaConfig);
-        tonoParcial=tonoActual;
-        temaActual=bundle.getString("temaConfiguracion");
-        temaParcial=temaActual;
-        rutaImagen=bundle.getString("imagenConfiguracion");*/
-        imagenConfiguracion = (ImageView) findViewById(R.id.editarAvatar);
-        spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
-        ////////Spinner color ///////
-        nombresColoresSistema();
-        ArrayAdapter<String> adapter_colores= new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,nombresColores);
-        adapter_colores
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerColors.setAdapter(adapter_colores);
-        spinnerColors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerColors.setSelection(position);
-                String colorSeleccionado = (String) spinnerColors.getSelectedItem();
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
 
-                switch (colorSeleccionado){
-                    case "Azul":
-                        temaParcial="AS_theme_azul";
-                    break;
+            TransferUsuario usuario = (TransferUsuario) getIntent().getExtras().getSerializable("usuarioConfig");
 
-                    case "Rojo":
-                        temaParcial="AS_theme_rojo";
-                        break;
+            editarNombre = (EditText) findViewById(R.id.nombreConfig);
+            editarApellidos = (EditText) findViewById(R.id.apellidosConfig);
+            editarCiudad = (EditText) findViewById(R.id.ciudadConfig);
+            editarTelefono = (EditText) findViewById(R.id.telefonoConfig);
+            editarEmail = (EditText) findViewById(R.id.emailConfig);
+            aceptar = (Button) findViewById(R.id.envioNuevaConfig);
+            temaActual = usuario.getColor();
+            temaParcial = temaActual;
+            rutaImagen = usuario.getAvatar();
+            imagenConfiguracion = (ImageView) findViewById(R.id.imagenConfig);
 
-                    case "Rosa":
-                        temaParcial="AS_theme_rosa";
-                        break;
+            spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
+            ////////Spinner color ///////
+            nombresColoresSistema();
+            ArrayAdapter<String> adapter_colores = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, nombresColores);
+            adapter_colores
+                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerColors.setAdapter(adapter_colores);
+            spinnerColors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    spinnerColors.setSelection(position);
+                    String colorSeleccionado = (String) spinnerColors.getSelectedItem();
 
-                    case "Verde":
-                        temaParcial="AS_theme_verde";
-                        break;
-                    case "Negro":
-                        temaParcial="AS_theme_negro";
-                        break;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                    switch (colorSeleccionado) {
+                        case "Azul":
+                            temaParcial = "AS_theme_azul";
+                            break;
 
-            }
-        });
-        ////////////////////////////////////////////////////
-        /*if(!bundle.getString("imagenConfiguracion").equals(""))
-            imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(bundle.getString("imagenConfiguracion")));
-        else
-            imagenConfiguracion.setImageResource(R.drawable.avatar);
+                        case "Rojo":
+                            temaParcial = "AS_theme_rojo";
+                            break;
 
-        editarNombre.setText(bundle.getString("nombreConfiguracion"));
+                        case "Rosa":
+                            temaParcial = "AS_theme_rosa";
+                            break;
 
-
-        aceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!editarNombre.getText().toString().matches("")) {
-                    TransferUsuario editarUsuario = new TransferUsuario();
-                    editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
-                    temaActual = temaParcial;
-                    tonoActual = tonoParcial;
-                    editarUsuario.setColor(temaActual);
-                    editarUsuario.setAvatar(rutaImagen);
-
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
-
-                }else{
-                    Toast errorNombre =
-                            Toast.makeText(getApplicationContext(),
-                                    "No puede estar vacío el campo nombre", Toast.LENGTH_SHORT);
-
-                    errorNombre.show();
+                        case "Verde":
+                            temaParcial = "AS_theme_verde";
+                            break;
+                        case "Negro":
+                            temaParcial = "AS_theme_negro";
+                            break;
+                    }
                 }
 
-            }
-        });*/
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
+                }
+            });
+            ////////////////////////////////////////////////////
+            if(!usuario.getAvatar().equals(""))
+                imagenConfiguracion.setImageBitmap(BitmapFactory.decodeFile(usuario.getAvatar()));
+            else
+                imagenConfiguracion.setImageResource(R.drawable.avatar);
+
+            editarNombre.setText(usuario.getNombre());
+            editarApellidos.setText(usuario.getApellidos());
+            editarCiudad.setText(usuario.getCiudad());
+            editarEmail.setText(usuario.getEmail());
+
+            if(usuario.getTelefono() != 0)
+                editarTelefono.setText(usuario.getTelefono()+"");
+
+            aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String nombreU = String.valueOf(editarNombre.getText());
+                    String apellidosU = String.valueOf(editarApellidos.getText());
+                    String ciudadU = String.valueOf(editarCiudad.getText());
+                    String emailU = String.valueOf(editarEmail.getText());
+                    Integer telefonoU = 0;
+
+                    if (!String.valueOf(editarTelefono.getText()).equals(""))
+                        telefonoU = Integer.parseInt(String.valueOf(editarTelefono.getText()));
+
+                    if (datosUsuarioValidos(nombreU, emailU)) {
+                        TransferUsuario editarUsuario = new TransferUsuario();
+                        editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
+                        temaActual = temaParcial;
+                        editarUsuario.setColor(temaActual);
+                        editarUsuario.setAvatar(rutaImagen);
+                        editarUsuario.setNombre(nombreU);
+                        editarUsuario.setApellidos(apellidosU);
+                        editarUsuario.setCiudad(ciudadU);
+                        editarUsuario.setTelefono(telefonoU);
+                        editarUsuario.setEmail(emailU);
+
+                        Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
+                        Toast.makeText(getApplicationContext(), "El usuario ha sido modificado con éxito", Toast.LENGTH_SHORT).show();
+                        Contexto.getInstancia().getContext().startActivity(new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class));
+
+                    } else {
+                        Toast errorNombre =
+                                Toast.makeText(getApplicationContext(),
+                                        "No puede estar vacío el campo nombre", Toast.LENGTH_SHORT);
+
+                        errorNombre.show();
+                    }
+
+                }
+            });
+        }
 
     }
 
-    private void nombresTonosSistema() {
-        switch (tonoActual){
-            case "tono1":
-                nombresTonos[0]="Tono 1"; nombresTonos[1]="Tono 2";nombresTonos[2]="Tono 3";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono2":
-                nombresTonos[0]="Tono 2"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 3";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono3":
-                nombresTonos[0]="Tono 3"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 4";nombresTonos[4]="Tono 5";
-                break;
-            case "tono4":
-                nombresTonos[0]="Tono 4"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 3";nombresTonos[4]="Tono 5";
-                break;
-            case "tono5":
-                nombresTonos[0]="Tono 5"; nombresTonos[1]="Tono 1";nombresTonos[2]="Tono 2";nombresTonos[3]="Tono 3";nombresTonos[4]="Tono 4";
-                break;
-        }
+    public boolean datosUsuarioValidos(String nombre, String correo){
+
+        if(!nombre.toString().matches("") &&
+                !correo.toString().matches("")) {
+
+            if(correo.toString().matches(PATRON_EMAIL)){
+                return true;
+            }else
+                mostrarMensajeError("Campo email inválido");
+        }else
+            mostrarMensajeError("Algún campo obligatorio es vacío");
+
+        return false;
+    }
+
+    private void mostrarMensajeError(String msg){
+        Toast errorNombre =
+                Toast.makeText(getApplicationContext(),
+                        msg, Toast.LENGTH_SHORT);
+        errorNombre.show();
     }
 
     private void nombresColoresSistema() {
