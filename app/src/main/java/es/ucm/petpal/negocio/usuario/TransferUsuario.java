@@ -12,38 +12,19 @@ public class TransferUsuario {
 
 	private String nombre;
 
-	private String correo;
+	private String apellidos;
 
 	private String avatar;
 
-	private String informe;
+	private String ciudad;
 
-	private Integer puntuacion;
+	private Integer telefono;
+
+	private String email;
 
 	private String color;
 
-	private String tono;
-
-	private String nombreTutor;
-
-	private String correoTutor;
-
-	private Integer puntuacionAnterior;
-
 	public TransferUsuario(){	}
-
-	public TransferUsuario(Usuario usuario){
-		this.id = usuario.getId();
-		this.nombre = usuario.getNombre();
-		this.correo = usuario.getCorreo();
-		this.avatar = usuario.getAvatar();
-		this.puntuacion = usuario.getPuntuacion();
-		this.color = usuario.getColor();
-		this.tono = usuario.getTono();
-		this.nombreTutor = usuario.getNombreTutor();
-		this.correoTutor = usuario.getCorreoTutor();
-		this.puntuacionAnterior = usuario.getPuntuacionAnterior();
-	}
 
 	public Integer getId() {
 		return id;
@@ -61,12 +42,12 @@ public class TransferUsuario {
 		this.nombre = nombre;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getApellidos() {
+		return apellidos;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
 	public String getAvatar() {
@@ -77,20 +58,28 @@ public class TransferUsuario {
 		this.avatar = avatar;
 	}
 
-	public String getInforme() {
-		return informe;
+	public String getCiudad() {
+		return ciudad;
 	}
 
-	public void setInforme(String informe) {
-		this.informe = informe;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
-	public Integer getPuntuacion() {
-		return puntuacion;
+	public Integer getTelefono() {
+		return telefono;
 	}
 
-	public void setPuntuacion(Integer puntuacion) {
-		this.puntuacion = puntuacion;
+	public void setTelefono(Integer telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getColor() {
@@ -99,37 +88,5 @@ public class TransferUsuario {
 
 	public void setColor(String color) {
 		this.color = color;
-	}
-
-	public String getTono() {
-		return tono;
-	}
-
-	public void setTono(String tono) {
-		this.tono = tono;
-	}
-
-	public String getNombreTutor() {
-		return nombreTutor;
-	}
-
-	public void setNombreTutor(String nombreTutor) {
-		this.nombreTutor = nombreTutor;
-	}
-
-	public String getCorreoTutor() {
-		return correoTutor;
-	}
-
-	public void setCorreoTutor(String correoTutor) {
-		this.correoTutor = correoTutor;
-	}
-
-	public Integer getPuntuacionAnterior() {
-		return puntuacionAnterior;
-	}
-
-	public void setPuntuacionAnterior(Integer puntuacionAnterior) {
-		this.puntuacionAnterior = puntuacionAnterior;
 	}
 }

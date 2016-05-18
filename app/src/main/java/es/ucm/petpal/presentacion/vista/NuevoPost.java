@@ -13,16 +13,36 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.negocio.post.TransferPost;
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
+import es.ucm.petpal.presentacion.web.ConfiguracionWebService;
+import es.ucm.petpal.presentacion.web.VolleySingleton;
 
 /**
  * Created by Juan Lu on 11/05/2016.
@@ -36,6 +56,9 @@ public class NuevoPost extends Activity {
     static String temaActual="AS_theme_azul";
     private ImageView imagenConfiguracion;
     private String rutaImagen="";
+    private EditText titulo;
+    private EditText ubicacion;
+    private EditText descripcion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +68,9 @@ public class NuevoPost extends Activity {
         setContentView(R.layout.activity_crear_publicacion);
 
         imagenConfiguracion = (ImageView) findViewById(R.id.newImagenPost);
+        titulo = (EditText) findViewById(R.id.nuevoTitulo);
+        ubicacion = (EditText) findViewById(R.id.nuevaUbicacion);
+        descripcion = (EditText) findViewById(R.id.nuevaDescripcion);
 
     }
 
@@ -155,5 +181,115 @@ public class NuevoPost extends Activity {
                 rutaImagen=selectedImagePath;
             }
         }
+    }
+
+    public void crearPublicacion(View v){
+        Toast errorNombre =
+                Toast.makeText(getApplicationContext(),
+                        "AQUI VIENE LA MAGIA", Toast.LENGTH_SHORT);
+
+        errorNombre.show();
+
+        TransferUsuario usuario = new TransferUsuario();
+        usuario.setId(100);
+        usuario.setNombre("PEPE");
+        usuario.setAvatar("");
+        TransferPost post = new TransferPost();
+        post.setImagen(rutaImagen);
+        post.setId(100);
+        post.setTitulo(titulo.getText().toString());
+        post.setDescripcion(descripcion.getText().toString());
+        post.setUbicacion(ubicacion.getText().toString());
+        post.setUsuario(usuario);
+        post.setFecha(new Date());
+
+    ///Peticion al servidor localhost(en este caso)
+        HashMap<String, String> map = new HashMap<>();// Mapeo previo
+        map.put("idUsuario", post.getUsuario().getId().toString());
+        map.put("titulo", post.getTitulo());
+        map.put("descripcion", post.getDescripcion());
+        map.put("ubicacion", post.getUbicacion());
+        map.put("imagen", post.getImagen());
+        map.put("fecha", new Date().toString());
+        // Crear nuevo objeto Json basado en el mapa
+        JSONObject jobject = new JSONObject(map);
+
+        // Depurando objeto Json...
+        Log.d("NUEVO_POST", jobject.toString());
+
+
+        // Actualizar datos en el servidor
+        VolleySingleton.getInstance(this).addToRequestQueue(
+                new JsonObjectRequest(
+                        Request.Method.POST,
+                        ConfiguracionWebService.INSERT_POST,
+                        jobject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                mostrarMensaje(response);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("NUEVO_POST", "Error Volley: " + error.getMessage());
+                            }
+                        }
+
+                ) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8" + getParamsEncoding();
+                    }
+                }
+        );
+
+
+
+    }
+
+    private void mostrarMensaje(JSONObject response) {
+
+        try {
+            // Obtener estado
+            String estado = response.getString("estado");
+            // Obtener mensaje
+            String mensaje = response.getString("mensaje");
+
+            switch (estado) {
+                case "1":
+                    // Mostrar mensaje
+                    Toast exito =
+                            Toast.makeText(getApplicationContext(),
+                                    "Post realizado correctamente", Toast.LENGTH_SHORT);
+
+                    exito.show();
+                    this.finish();
+                    break;
+
+                case "2":
+                    // Mostrar mensaje error ( Nº 2 es el mensaje de error enviado por el webServices
+                    Toast errorNombre =
+                            Toast.makeText(getApplicationContext(),
+                                    "Error al realizar el post", Toast.LENGTH_SHORT);
+
+                    errorNombre.show();
+                    // Terminar actividad
+                    this.finish();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -40,7 +40,6 @@ public class SAUsuarioImp implements SAUsuario {
 				usuario.setNombre(datos.getNombre());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
-				usuario.setTono(datos.getTono());
 				daoUsuario.update(usuario);
 			}else
 				return null;
@@ -56,93 +55,13 @@ public class SAUsuarioImp implements SAUsuario {
 
 	@Override
 	public void crearUsuario(TransferUsuario transferUsuario) {
-		
-		Dao<Usuario, Integer> daoUsuario;
-		try {
-			daoUsuario = getHelper().getUsuarioDao();
 
-			Usuario usuario = new Usuario();
-
-			// actualizamos los valores del nuevo usuario con los introducidos o por defecto
-			if (transferUsuario.getNombre() != null)
-				usuario.setNombre(transferUsuario.getNombre());
-			else
-				usuario.setNombre("Usuario");
-
-			if (transferUsuario.getCorreo() != null)
-				usuario.setCorreo(transferUsuario.getCorreo());
-
-			if (transferUsuario.getAvatar() != null)
-				usuario.setAvatar(transferUsuario.getAvatar());
-
-			if (transferUsuario.getPuntuacion() != null)
-				usuario.setPuntuacion(transferUsuario.getPuntuacion());
-			else
-				usuario.setPuntuacion(0);
-
-			if (transferUsuario.getPuntuacionAnterior() != null)
-				usuario.setPuntuacionAnterior(transferUsuario.getPuntuacionAnterior());
-			else
-				usuario.setPuntuacionAnterior(0);
-
-			if (transferUsuario.getColor() != null)
-				usuario.setColor(transferUsuario.getColor());
-
-			if (transferUsuario.getTono() != null)
-				usuario.setTono(transferUsuario.getTono());
-
-			if (transferUsuario.getNombreTutor() != null)
-				usuario.setNombreTutor(transferUsuario.getNombreTutor());
-
-			if (transferUsuario.getCorreoTutor() != null)
-				usuario.setCorreoTutor(transferUsuario.getCorreoTutor());
-
-			// se crea la fila en la tabla de la BBDD
-			daoUsuario.create(usuario);
-
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
 	public TransferUsuario consultarUsuario() {
-		Dao<Usuario, Integer> daoUsuario;
-		TransferUsuario transferUsuario = new TransferUsuario();
-		try {
 
-			daoUsuario = getHelper().getUsuarioDao();
-
-			if (!daoUsuario.idExists(1))
-				return null;
-			else {
-				Usuario u = daoUsuario.queryForId(1);
-				// metemos los datos en un transfer
-				transferUsuario.setId(u.getId());
-				if (u.getNombre() != null)
-					transferUsuario.setNombre(u.getNombre());
-				if (u.getCorreo() != null)
-					transferUsuario.setCorreo(u.getCorreo());
-				if (u.getAvatar() != null)
-					transferUsuario.setAvatar(u.getAvatar());
-				if (u.getPuntuacion() != null)
-					transferUsuario.setPuntuacion(u.getPuntuacion());
-				if (u.getPuntuacionAnterior() != null)
-					transferUsuario.setPuntuacionAnterior(u.getPuntuacionAnterior());
-				if (u.getColor() != null)
-					transferUsuario.setColor(u.getColor());
-				if (u.getTono() != null)
-					transferUsuario.setTono(u.getTono());
-				if (u.getNombreTutor() != null)
-					transferUsuario.setNombreTutor(u.getNombreTutor());
-				if (u.getCorreoTutor() != null)
-					transferUsuario.setCorreoTutor(u.getCorreoTutor());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return transferUsuario;
+		return null;
 	}
 
 	@Override

@@ -83,8 +83,8 @@ public class SAPostImp implements SAPost {
         SAUsuario saUsuario = FactoriaSA.getInstancia().nuevoSAUsuario();
         TransferUsuario usuario = saUsuario.consultarUsuario();
         String name = usuario.getNombre();
-        Integer puntuacion = usuario.getPuntuacion();
-        Integer puntuacionAnterior = usuario.getPuntuacionAnterior();
+        Integer puntuacion = 0;
+        Integer puntuacionAnterior = 0;
 
         Document document = new Document();
         File f = crearFichero(NOMBRE_DOCUMENTO);
