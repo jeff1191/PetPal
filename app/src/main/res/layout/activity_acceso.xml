@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:paddingTop="20dp"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:id="@+id/imageView3"
             android:layout_gravity="center"
             android:src="@drawable/logo" />
@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Registro"
+            android:text="Iniciar sesion"
             android:id="@+id/tituloInicio"
             android:textStyle="bold"
             android:gravity="center"
@@ -43,60 +43,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="2.5"
         android:orientation="vertical"
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:textColor="@color/blue"
-            android:id="@+id/nombreReg"
-            android:hint="Nombre" />
-        <EditText
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:textColor="@color/blue"
-        android:id="@+id/ApellidosReg"
-        android:hint="Apellidos" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:textColor="@color/blue"
-            android:id="@+id/passReg"
-            android:hint="Contraseña" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:hint="Ciudad"
-            android:textColor="@color/blue"
-            android:ems="10"
-            android:id="@+id/ciudadReg" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:hint="Telefono"
-            android:textColor="@color/blue"
-            android:ems="10"
-            android:id="@+id/telefononReg" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -107,7 +57,16 @@
             android:textColor="@color/blue"
             android:id="@+id/emailRegistro"
             android:hint="Email" />
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:hint="Contraseña"
+            android:textColor="@color/blue"
+            android:ems="10"
+            android:id="@+id/passRegistro" />
 
     </LinearLayout>
 
@@ -115,7 +74,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"></LinearLayout>
+        android:layout_weight="0.5"></LinearLayout>
 
     <Button
             android:layout_width="wrap_content"
@@ -123,17 +82,17 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Aceptar"
-            android:id="@+id/aceptarRegistro"
+            android:id="@+id/aceptarInicioSesion"
             android:layout_gravity="center_horizontal"
             android:background="@color/blue"
             android:textColor="@color/white"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-        android:onClick="realizarRegistro" />
+            android:onClick="realizarInicio" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.25"></LinearLayout>
+        android:layout_weight="0.5"></LinearLayout>
 </LinearLayout>
