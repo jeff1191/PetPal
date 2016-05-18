@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import es.ucm.petpal.R;
@@ -23,7 +24,11 @@ public class PetPalWebView extends Activity{
         this.setContentView(R.layout.activity_web_view);
 
         myWebView = (WebView) this.findViewById(R.id.webView);
-        myWebView.loadUrl("https://google.es");
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("file:///android_asset/index.html");
+
+
 
     }
 

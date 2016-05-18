@@ -52,6 +52,14 @@ public class TransferPost {
         this.descripcion = descripcion;
     }
 
+    public TransferUsuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(TransferUsuario usuario) {
+        this.usuario = usuario;
+    }
+
     public String getImagen() {
         return imagen;
     }
@@ -66,14 +74,6 @@ public class TransferPost {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public TransferUsuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(TransferUsuario usuario) {
-        this.usuario = usuario;
     }
 }
 
