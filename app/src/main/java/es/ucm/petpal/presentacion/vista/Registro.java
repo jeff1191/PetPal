@@ -27,8 +27,8 @@ public class Registro extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_registro);
-        nombreUsuario = (EditText) findViewById(R.id.nombreRegistro);
-        correoUsuario = (EditText) findViewById(R.id.emailRegistro);
+        //nombreUsuario = (EditText) findViewById(R.id.nombreRegistro);
+        //correoUsuario = (EditText) findViewById(R.id.emailRegistro);
     }
 
     public void realizarRegistro(View v){

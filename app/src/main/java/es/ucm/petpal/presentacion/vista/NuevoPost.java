@@ -15,11 +15,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,17 +34,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import es.ucm.petpal.R;
 import es.ucm.petpal.negocio.post.TransferPost;
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
-import es.ucm.petpal.negocio.post.TransferPost;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.web.ConfiguracionWebService;
 import es.ucm.petpal.presentacion.web.VolleySingleton;
 
@@ -64,9 +61,6 @@ public class NuevoPost extends Activity {
     private EditText ubicacion;
     private EditText descripcion;
 
-    private TextView tituloTV;
-    private TextView ubicacionTV;
-    private TextView descripcionTV;
     private Button guardarPost;
 
     @Override
@@ -75,25 +69,22 @@ public class NuevoPost extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_crear_publicacion);
-        titulo = (EditText) findViewById(R.id.nuevoTitulo);
-        ubicacion = (EditText) findViewById(R.id.nuevaUbicacion);
-        descripcion = (EditText) findViewById(R.id.nuevaDescripcion);
 
         imagenPost = (ImageView) findViewById(R.id.imagenPost);
-        tituloTV = (TextView) findViewById(R.id.tituloPost);
-        ubicacionTV = (TextView) findViewById(R.id.ubicacionPost);
-        descripcionTV = (TextView) findViewById(R.id.descripcionPost);
+        titulo = (EditText) findViewById(R.id.tituloPost);
+        ubicacion = (EditText) findViewById(R.id.ubicacionPost);
+        descripcion = (EditText) findViewById(R.id.descripcionPost);
         guardarPost = (Button) findViewById(R.id.guardarPost);
-        final String tituloP = String.valueOf(tituloTV.getText());
-        final String ubicacionP = String.valueOf(ubicacionTV.getText());
-        final String descripcionP = String.valueOf(descripcionTV.getText());
+        final String tituloP = String.valueOf(titulo.getText());
+        final String ubicacionP = String.valueOf(ubicacion.getText());
+        final String descripcionP = String.valueOf(descripcion.getText());
 
         guardarPost.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tituloP = String.valueOf(tituloTV.getText());
-                String ubicacionP = String.valueOf(ubicacionTV.getText());
-                String descripcionP = String.valueOf(descripcionTV.getText());
+                String tituloP = String.valueOf(titulo.getText());
+                String ubicacionP = String.valueOf(ubicacion.getText());
+                String descripcionP = String.valueOf(descripcion.getText());
 
                 if(datosPostValidos(tituloP, ubicacionP, descripcionP)){
                     TransferPost nuevoPost = new TransferPost();
