@@ -4,14 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import es.ucm.petpal.R;
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
+import es.ucm.petpal.presentacion.web.ConfiguracionWebService;
+import es.ucm.petpal.presentacion.web.VolleySingleton;
 
 /**
  * Created by Juan Lu on 15/03/2016.
@@ -45,8 +59,6 @@ public class Registro extends Activity {
     }
 
     public void realizarRegistro(View v){
-        //Aqui es donde se deberia comprobar lo de la sincronizacion
-
         //Leer los datos del "fomulario"
         String nombre = String.valueOf(nombreUsuario.getText());
         String apellidos = String.valueOf(apellidosUsuario.getText());
@@ -63,18 +75,73 @@ public class Registro extends Activity {
             crearUsuario.setEmail(email);
             crearUsuario.setApellidos(apellidos);
             crearUsuario.setCiudad(ciudad);
+
             if(!telefono.toString().matches("")){
-                crearUsuario.setTelefono(Integer.parseInt(telefono));
+                crearUsuario.setTelefono(telefono);
             }
             else{
-                crearUsuario.setTelefono(0);
+                crearUsuario.setTelefono("");
             }
-
-            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-            
-            startActivity(new Intent(this, MainActivity.class));
+            //if(realizarRegistroWeb(crearUsuario)){
+                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
+                startActivity(new Intent(this, MainActivity.class));
+            //}
         }
 
+    }
+
+    private boolean realizarRegistroWeb(TransferUsuario crearUsuario) {
+        ///Peticion al servidor localhost(en este caso)
+        HashMap<String, String> map = new HashMap<>();// Mapeo previo
+        map.put("nombre", crearUsuario.getNombre());
+        map.put("apellidos", crearUsuario.getApellidos());
+        map.put("avatar", crearUsuario.getAvatar());
+        map.put("ciudad", crearUsuario.getCiudad());
+        map.put("telefono", crearUsuario.getTelefono());
+        map.put("email", new Date().toString());
+        map.put("contrasenya", new Date().toString());
+        // Crear nuevo objeto Json basado en el mapa
+        JSONObject jobject = new JSONObject(map);
+
+        // Depurando objeto Json...
+        Log.d("NUEVO_USUARIO", jobject.toString());
+
+        final boolean[] terminar = {false};
+        // Actualizar datos en el servidor
+        VolleySingleton.getInstance(this).addToRequestQueue(
+                new JsonObjectRequest(
+                        Request.Method.POST,
+                        ConfiguracionWebService.INSERT_POST,
+                        jobject,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                terminar[0] =true;
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                terminar[0] =false;
+                            }
+                        }
+
+                ) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json; charset=utf-8");
+                        headers.put("Accept", "application/json");
+                        return headers;
+                    }
+
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8" + getParamsEncoding();
+                    }
+                }
+        );
+        return terminar[0];
     }
 
     public void volverDecision(View v){

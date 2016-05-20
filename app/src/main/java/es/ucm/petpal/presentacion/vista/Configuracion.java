@@ -131,9 +131,7 @@ public class Configuracion extends Activity {
             editarApellidos.setText(usuario.getApellidos());
             editarCiudad.setText(usuario.getCiudad());
             editarEmail.setText(usuario.getEmail());
-
-            if(usuario.getTelefono() != 0)
-                editarTelefono.setText(usuario.getTelefono()+"");
+            editarTelefono.setText(usuario.getTelefono());
 
             aceptar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,10 +140,7 @@ public class Configuracion extends Activity {
                     String apellidosU = String.valueOf(editarApellidos.getText());
                     String ciudadU = String.valueOf(editarCiudad.getText());
                     String emailU = String.valueOf(editarEmail.getText());
-                    Integer telefonoU = 0;
-
-                    if (!String.valueOf(editarTelefono.getText()).equals(""))
-                        telefonoU = Integer.parseInt(String.valueOf(editarTelefono.getText()));
+                    String telefonoU = String.valueOf(editarTelefono.getText());
 
                     if (datosUsuarioValidos(nombreU, emailU)) {
                         TransferUsuario editarUsuario = new TransferUsuario();

@@ -21,24 +21,13 @@ public class TransferUsuario implements Serializable {
 
 	private String ciudad;
 
-	private Integer telefono;
+	private String telefono;
 
 	private String email;
 
 	private String color;
 
 	public TransferUsuario(){	}
-
-	public TransferUsuario(Usuario usuario){
-		this.id = usuario.getId();
-		this.nombre = usuario.getNombre();
-		this.apellidos = usuario.getApellidos();
-		this.avatar = usuario.getAvatar();
-		this.telefono = usuario.getTelefono();
-		this.ciudad = usuario.getCiudad();
-		this.email = usuario.getEmail();
-		this.color = usuario.getColor();
-	}
 
 	public Integer getId() {
 		return id;
@@ -80,11 +69,11 @@ public class TransferUsuario implements Serializable {
 		this.ciudad = ciudad;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

@@ -24,7 +24,7 @@ public class Usuario {
 	private String avatar;
 
 	@DatabaseField(columnName = "TELEFONO")
-	private Integer telefono;
+	private String telefono;
 
 	@DatabaseField(columnName = "CIUDAD")
 	private String ciudad;
@@ -72,11 +72,11 @@ public class Usuario {
 		this.avatar = avatar;
 	}
 
-	public Integer getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(Integer telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

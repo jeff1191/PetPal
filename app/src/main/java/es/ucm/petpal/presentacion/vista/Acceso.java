@@ -48,7 +48,7 @@ public class Acceso extends Activity{
             crearUsuario.setEmail("soyfacilymelotrago@gargantaprofunda.xxx");
             crearUsuario.setApellidos("LE GUSTAN LOS PENES");
             crearUsuario.setCiudad("RABOLANDIA");
-            crearUsuario.setTelefono(Integer.parseInt("696969696"));
+            crearUsuario.setTelefono("696969696");
 
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
 

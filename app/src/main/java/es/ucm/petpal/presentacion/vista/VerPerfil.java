@@ -66,8 +66,8 @@ public class VerPerfil extends Activity{
                     ciudadTV.setText("ciudad no disponible");
                 }
 
-                if (usuario.getTelefono() != null && usuario.getTelefono() != 0)
-                    telefonoTV.setText(usuario.getTelefono()+"");
+                if (usuario.getTelefono() != null && usuario.getTelefono().equals(""))
+                    telefonoTV.setText(usuario.getTelefono());
                 else {
                     telefonoTV.setTypeface(null, Typeface.ITALIC);
                     telefonoTV.setText("telefono no disponible");
