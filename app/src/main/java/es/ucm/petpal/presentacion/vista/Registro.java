@@ -27,16 +27,16 @@ public class Registro extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_registro);
-        //nombreUsuario = (EditText) findViewById(R.id.nombreRegistro);
-        //correoUsuario = (EditText) findViewById(R.id.emailRegistro);
+        nombreUsuario = (EditText) findViewById(R.id.nombreReg);
+        correoUsuario = (EditText) findViewById(R.id.emailRegistro);
     }
 
     public void realizarRegistro(View v){
         //Aqui es donde se deberia comprobar lo de la sincronizacion
 
         //Leer los datos del "fomulario"
-        String nombre = String.valueOf(nombreUsuario.getText());
-        String correo = String.valueOf(correoUsuario.getText());
+        String nombre = nombreUsuario.getText().toString();
+        String correo = correoUsuario.getText().toString();
 
         if(datosValidos(nombre,correo)){
             //Borrar esto de abajo y meter el usuario de la web view

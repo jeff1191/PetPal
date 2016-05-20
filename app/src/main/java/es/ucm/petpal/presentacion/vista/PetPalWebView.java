@@ -2,10 +2,13 @@ package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import es.ucm.petpal.R;
 
@@ -25,10 +28,17 @@ public class PetPalWebView extends Activity{
 
         myWebView = (WebView) this.findViewById(R.id.webView);
         WebSettings webSettings = myWebView.getSettings();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+            webSettings.setAllowUniversalAccessFromFileURLs(true);
+            webSettings.setAllowFileAccessFromFileURLs(true);
+        }
+        webSettings.setAllowFileAccessFromFileURLs(true);
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.setWebChromeClient(new WebChromeClient());
+        myWebView.setWebViewClient(new WebViewClient());
         myWebView.loadUrl("file:///android_asset/index.html");
-
-
 
     }
 
