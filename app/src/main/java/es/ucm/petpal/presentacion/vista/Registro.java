@@ -19,59 +19,75 @@ import es.ucm.petpal.presentacion.controlador.ListaComandos;
 public class Registro extends Activity {
 
     private EditText nombreUsuario;
-    private EditText correoUsuario;
+    private EditText apellidosUsuario;
+    private EditText passUsuario;
+    private EditText ciudadUsuario;
+    private EditText telefonoUsuario;
+    private EditText emailUsuario;
+
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final String PATRON_TELEFONO = "^[0-9]{9}$";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_registro);
-        //nombreUsuario = (EditText) findViewById(R.id.nombreRegistro);
-        //correoUsuario = (EditText) findViewById(R.id.emailRegistro);
+        nombreUsuario = (EditText) findViewById(R.id.nombreReg);
+        apellidosUsuario = (EditText) findViewById(R.id.apellidosReg);
+        passUsuario = (EditText) findViewById(R.id.passReg);
+        ciudadUsuario = (EditText) findViewById(R.id.ciudadReg);
+        telefonoUsuario = (EditText) findViewById(R.id.telefononReg);
+        emailUsuario = (EditText) findViewById(R.id.emailReg);
+
     }
 
     public void realizarRegistro(View v){
-        //Aqui es donde se deberia comprobar lo de la sincronizacion
 
         //Leer los datos del "fomulario"
         String nombre = String.valueOf(nombreUsuario.getText());
-        String correo = String.valueOf(correoUsuario.getText());
+        String apellidos = String.valueOf(apellidosUsuario.getText());
+        String pass = String.valueOf(passUsuario.getText());
+        String ciudad = String.valueOf(ciudadUsuario.getText());
+        String telefono = String.valueOf(telefonoUsuario.getText());
+        String email = String.valueOf(emailUsuario.getText());
 
-        if(datosValidos(nombre,correo)){
-            //Borrar esto de abajo y meter el usuario de la web view
+        if(datosValidos(nombre,email,telefono)){
             TransferUsuario crearUsuario = new TransferUsuario();
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
             crearUsuario.setColor("AS_theme_azul");
-            crearUsuario.setEmail(correo);
-            crearUsuario.setApellidos("López");
-            crearUsuario.setCiudad("Madrid");
-            crearUsuario.setTelefono(111222333);
+            crearUsuario.setEmail(email);
+            crearUsuario.setApellidos(apellidos);
+            crearUsuario.setCiudad(ciudad);
+            crearUsuario.setTelefono(Integer.parseInt(telefono));
             
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-           // startService(new Intent(this, ServicioNotificaciones.class));
             
             startActivity(new Intent(this, MainActivity.class));
-    }
-        /*
-        //De momento va a sacar un mensaje y pasara a la main activity
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cuidado!")
-                .setMessage("No se ha podido establecer una conexion del usuario " + nombre + "con el correo" + correo +
-                        " y la clave " + clave + "con tu tutor asignado. No estas sincronizado, como estamos en " +
-                        "testing pasamos directamente a la Main Activity").show();*/
-
+        }
 
     }
 
-    private boolean datosValidos(String nombre, String correo) {
-        ////////////////////FALTARIA VALIDAR EL CÓDIGO //////////////////////////
+    public void volverDecision(View v){
+        startActivity(new Intent(this, Decision.class));
+    }
+
+    private boolean datosValidos(String nombre, String correo, String telefono) {
         if(!nombre.toString().matches("") &&
                 !correo.toString().matches("")) {
 
             if(correo.toString().matches(PATRON_EMAIL)){
-                    return true;
+                if(!telefono.toString().matches("")){
+                    if(telefono.toString().matches(PATRON_TELEFONO)){
+                        return true;
+                    }
+                    else
+                        mostrarMensajeError("Campo telefono inválido");
+                }
+                return true;
             }else
                 mostrarMensajeError("Campo email inválido");
         }else

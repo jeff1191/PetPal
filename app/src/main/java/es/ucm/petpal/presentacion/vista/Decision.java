@@ -3,6 +3,7 @@ package es.ucm.petpal.presentacion.vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
@@ -25,13 +26,7 @@ public class Decision extends Activity {
         try {
             cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
 
-
-            if (cargarUsuario == null){
-                Intent intent = new Intent().setClass(Decision.this, Registro.class);
-                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-            }
-            else{
+            if (cargarUsuario != null){
                 Intent intent = new Intent().setClass(Decision.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -40,5 +35,13 @@ public class Decision extends Activity {
             e.printStackTrace();
         }
         finish();
+    }
+
+    public void irAcceso(View v){
+        startActivity(new Intent(this, Acceso.class));
+    }
+
+    public void irRegistro(View v){
+        startActivity(new Intent(this, Registro.class));
     }
 }

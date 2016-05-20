@@ -24,8 +24,8 @@ public class Acceso extends Activity{
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_acceso);
-        passUsuario = (EditText) findViewById(R.id.passRegistro);
-        correoUsuario = (EditText) findViewById(R.id.emailRegistro);
+        passUsuario = (EditText) findViewById(R.id.passAcceso);
+        correoUsuario = (EditText) findViewById(R.id.emailAcesso);
     }
 
     public void realizarInicio(View v){
@@ -36,36 +36,19 @@ public class Acceso extends Activity{
         String correo = String.valueOf(correoUsuario.getText());
 
         if(datosValidos(pass,correo)){
-            //Borrar esto de abajo y meter el usuario de la web view
-            /*TransferUsuario crearUsuario = new TransferUsuario();
-            crearUsuario.setNombre(nombre);
-            crearUsuario.setAvatar("");
-            crearUsuario.setColor("AS_theme_azul");
-            crearUsuario.setEmail(correo);
-            crearUsuario.setApellidos("López");
-            crearUsuario.setCiudad("Madrid");
-            crearUsuario.setTelefono(111222333);*/
-
-           // Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-            // startService(new Intent(this, ServicioNotificaciones.class));
 
             //HABRIA QUE BUSCAR EN EL SERVER Y GUARDAR EL USER EN BBDD
 
             startActivity(new Intent(this, MainActivity.class));
         }
-        /*
-        //De momento va a sacar un mensaje y pasara a la main activity
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cuidado!")
-                .setMessage("No se ha podido establecer una conexion del usuario " + nombre + "con el correo" + correo +
-                        " y la clave " + clave + "con tu tutor asignado. No estas sincronizado, como estamos en " +
-                        "testing pasamos directamente a la Main Activity").show();*/
-
 
     }
 
+    public void volverDecision(View v){
+        startActivity(new Intent(this, Decision.class));
+    }
+
     private boolean datosValidos(String nombre, String correo) {
-        ////////////////////FALTARIA VALIDAR EL CÓDIGO //////////////////////////
         if(!nombre.toString().matches("") &&
                 !correo.toString().matches("")) {
 
