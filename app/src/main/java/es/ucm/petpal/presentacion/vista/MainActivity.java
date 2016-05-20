@@ -93,6 +93,10 @@ public class MainActivity extends Activity {
                 Contexto.getInstancia().getContext().getApplicationContext(), NuevoPost.class));
     }
 
+    public void verPosts(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.VER_POSTS, null);
+    }
+
     public void enviarCorreo(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
         Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);

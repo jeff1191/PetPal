@@ -25,7 +25,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import es.ucm.petpal.R;
 import es.ucm.petpal.integracion.DBHelper;
@@ -242,6 +244,25 @@ public class SAPostImp implements SAPost {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public List<TransferPost> consultarPosts() {
+        Dao<Post, Integer> eventos;
+        List<Post> listaPosts = null;
+        List<TransferPost> transferPosts = new ArrayList<TransferPost>();
+        try {
+            eventos = getHelper().getPostDao();
+            listaPosts= eventos.queryForAll();
+            for(int i = 0; i < listaPosts.size(); i++)
+                transferPosts.add(new TransferPost(listaPosts.get(i).getId(), listaPosts.get(i).getFecha(),
+                        listaPosts.get(i).getTitulo(), listaPosts.get(i).getUbicacion(),
+                        listaPosts.get(i).getDescripcion(), listaPosts.get(i).getImagen()));
+
+        } catch (SQLException e) {
+
+        }
+        return transferPosts;
     }
 
 }

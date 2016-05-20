@@ -14,5 +14,5 @@ public class ListaComandos {
     public static final String ENVIAR_CORREO = "enviarCorreo";
     public static final String CREAR_POST = "crearPost";
     public static final String CONSULTAR_WEB_VIEW = "cargarWebView";
-
+    public static final String VER_POSTS = "verPosts";
 }

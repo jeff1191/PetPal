@@ -1,23 +1,78 @@
 package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.presentacion.controlador.Controlador;
+import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
  * Created by Juan Lu on 20/05/2016.
  */
 public class VerPosts extends Activity{
 
+    private ListView listaPosts;
+
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_posts);
+
+        listaPosts = (ListView) findViewById(R.id.listViewPosts);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle != null){
+            final ArrayList<String> listaP = bundle.getStringArrayList("listaPosts");
+            ArrayList<String> imagenesP = bundle.getStringArrayList("imagenesPosts");
+            ArrayList<String> ciudadesP = bundle.getStringArrayList("ciudadesPosts");
+            final ArrayList<Integer> listaIds = bundle.getIntegerArrayList("listaIds");
+            final ArrayList<String> descripcionesP = bundle.getStringArrayList("descripcionesPosts");
+            ArrayList<String> fechasP = bundle.getStringArrayList("fechasPosts");
+
+            if(listaP.isEmpty()){
+                Log.e("posts", " no hay nada ");
+                TextView listadoVacio = (TextView) findViewById(R.id.textoListadoVacio);
+                listaPosts.setVisibility(View.GONE);
+                listadoVacio.setTextColor(Color.GRAY);
+                listadoVacio.setVisibility(View.VISIBLE);
+            }
+            else{
+                Log.e("posts", " puee si que hay algo zagal ");
+                final AdaptadorPosts adaptador = new AdaptadorPosts(this);
+                adaptador.setDatos(listaP);
+                adaptador.setDatosImagenes(imagenesP);
+                adaptador.setDatosCiudades(ciudadesP);
+                adaptador.setDatosFechas(fechasP);
+                listaPosts.setAdapter(adaptador);
+
+                //Check
+                listaPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //ir a la pantalla de detalle
+                        AlertDialog.Builder builder = new AlertDialog.Builder(VerPosts.this);
+                        builder.setMessage(descripcionesP.get(position))
+                                .setTitle(listaP.get(position));
+                        builder.create().show();
+
+                    }
+                });
+            }
+        }
     }
 
     public void cargarTema(){
@@ -43,5 +98,9 @@ public class VerPosts extends Activity{
     public void volver(View v){
         Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
         startActivity(pantallaPrincipal);
+    }
+
+    public void ayuda(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "verPosts");
     }
 }

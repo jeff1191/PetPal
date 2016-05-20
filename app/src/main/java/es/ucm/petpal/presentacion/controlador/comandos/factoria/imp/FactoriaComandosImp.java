@@ -11,6 +11,7 @@ import es.ucm.petpal.presentacion.controlador.comandos.imp.EditarUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.GenerarPDFComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerAyudaComando;
+import es.ucm.petpal.presentacion.controlador.comandos.imp.VerPostsComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerWebViewComando;
 
 /**
@@ -47,6 +48,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_WEB_VIEW:
                 ret = new VerWebViewComando();
+                break;
+            case ListaComandos.VER_POSTS:
+                ret = new VerPostsComando();
                 break;
         }
 
