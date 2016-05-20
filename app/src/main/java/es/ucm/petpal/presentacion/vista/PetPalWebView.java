@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.presentacion.web.ConfiguracionWebService;
 
 /**
  * Created by Juan Lu on 11/05/2016.
@@ -38,8 +39,7 @@ public class PetPalWebView extends Activity{
         myWebView.setWebViewClient(new WebViewClient());
         myWebView.setWebChromeClient(new WebChromeClient());
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("file:///android_asset/index.html");
-
+        myWebView.loadUrl(ConfiguracionWebService.WEB_VIEW);
     }
 
     public void volver(View v){
