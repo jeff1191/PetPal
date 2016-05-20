@@ -48,6 +48,8 @@
 
         <activity android:name=".presentacion.vista.VerPerfil" />
 
+        <activity android:name=".presentacion.vista.VerPosts" />
+
         <activity android:name=".presentacion.vista.Acceso" />
 
         <activity android:name=".presentacion.vista.Registro"
