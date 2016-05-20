@@ -55,7 +55,7 @@ public class Registro extends Activity {
         String telefono = String.valueOf(telefonoUsuario.getText());
         String email = String.valueOf(emailUsuario.getText());
 
-        if(datosValidos(nombre,email,telefono)){
+        if(datosValidos(nombre,pass,email,telefono)){
             TransferUsuario crearUsuario = new TransferUsuario();
             crearUsuario.setNombre(nombre);
             crearUsuario.setAvatar("");
@@ -81,9 +81,9 @@ public class Registro extends Activity {
         startActivity(new Intent(this, Decision.class));
     }
 
-    private boolean datosValidos(String nombre, String correo, String telefono) {
+    private boolean datosValidos(String nombre, String pass, String correo, String telefono) {
         if(!nombre.toString().matches("") &&
-                !correo.toString().matches("")) {
+                !correo.toString().matches("") && !pass.toString().matches("")) {
 
             if(correo.toString().matches(PATRON_EMAIL)){
                 if(!telefono.toString().matches("")){
