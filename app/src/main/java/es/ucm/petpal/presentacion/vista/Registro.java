@@ -45,6 +45,7 @@ public class Registro extends Activity {
     }
 
     public void realizarRegistro(View v){
+        //Aqui es donde se deberia comprobar lo de la sincronizacion
 
         //Leer los datos del "fomulario"
         String nombre = String.valueOf(nombreUsuario.getText());
