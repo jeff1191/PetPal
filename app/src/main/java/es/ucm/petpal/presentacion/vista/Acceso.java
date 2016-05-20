@@ -9,6 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import es.ucm.petpal.R;
+import es.ucm.petpal.negocio.usuario.TransferUsuario;
+import es.ucm.petpal.presentacion.controlador.Controlador;
+import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
  * Created by Juan Lu on 18/05/2016.
@@ -38,6 +41,16 @@ public class Acceso extends Activity{
         if(datosValidos(pass,correo)){
 
             //HABRIA QUE BUSCAR EN EL SERVER Y GUARDAR EL USER EN BBDD
+            TransferUsuario crearUsuario = new TransferUsuario();
+            crearUsuario.setNombre("LA GUARRA DE JEFF");
+            crearUsuario.setAvatar("");
+            crearUsuario.setColor("AS_theme_azul");
+            crearUsuario.setEmail("soyfacilymelotrago@gargantaprofunda.xxx");
+            crearUsuario.setApellidos("LE GUSTAN LOS PENES");
+            crearUsuario.setCiudad("RABOLANDIA");
+            crearUsuario.setTelefono(Integer.parseInt("696969696"));
+
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
 
             startActivity(new Intent(this, MainActivity.class));
         }

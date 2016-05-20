@@ -62,8 +62,13 @@ public class Registro extends Activity {
             crearUsuario.setEmail(email);
             crearUsuario.setApellidos(apellidos);
             crearUsuario.setCiudad(ciudad);
-            crearUsuario.setTelefono(Integer.parseInt(telefono));
-            
+            if(!telefono.toString().matches("")){
+                crearUsuario.setTelefono(Integer.parseInt(telefono));
+            }
+            else{
+                crearUsuario.setTelefono(0);
+            }
+
             Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
             
             startActivity(new Intent(this, MainActivity.class));

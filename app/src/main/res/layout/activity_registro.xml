@@ -31,8 +31,7 @@
             android:text="Registro"
             android:id="@+id/tituloInicio"
             android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/blue" />
+            android:gravity="center" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -54,7 +53,6 @@
             android:gravity="center"
             android:inputType="textPersonName"
             android:ems="10"
-            android:textColor="@color/blue"
             android:id="@+id/nombreReg"
             android:hint="Nombre" />
         <EditText
@@ -64,7 +62,6 @@
         android:gravity="center"
         android:inputType="textPersonName"
         android:ems="10"
-        android:textColor="@color/blue"
         android:id="@+id/apellidosReg"
         android:hint="Apellidos" />
         <EditText
@@ -74,7 +71,6 @@
             android:gravity="center"
             android:inputType="textPersonName"
             android:ems="10"
-            android:textColor="@color/blue"
             android:id="@+id/passReg"
             android:hint="Contraseña" />
         <EditText
@@ -84,7 +80,6 @@
             android:gravity="center"
             android:inputType="textPersonName"
             android:hint="Ciudad"
-            android:textColor="@color/blue"
             android:ems="10"
             android:id="@+id/ciudadReg" />
         <EditText
@@ -94,7 +89,6 @@
             android:gravity="center"
             android:inputType="textPersonName"
             android:hint="Telefono"
-            android:textColor="@color/blue"
             android:ems="10"
             android:id="@+id/telefononReg" />
         <EditText
@@ -104,7 +98,6 @@
             android:gravity="center"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:textColor="@color/blue"
             android:id="@+id/emailReg"
             android:hint="Email" />
 
@@ -127,7 +120,7 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"></LinearLayout>
+            android:layout_weight="0.2"></LinearLayout>
 
         <Button
             android:layout_width="0dp"
@@ -136,16 +129,14 @@
             android:id="@+id/cancelarIncioSesion"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
-            android:background="@color/blue"
             android:gravity="center"
-            android:textColor="@color/white"
             android:onClick="volverDecision" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"></LinearLayout>
+            android:layout_weight="0.2"></LinearLayout>
 
         <Button
                 android:layout_width="0dp"
@@ -155,8 +146,6 @@
                 android:text="Aceptar"
                 android:id="@+id/aceptarRegistro"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/blue"
-                android:textColor="@color/white"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
             android:onClick="realizarRegistro" />
@@ -165,7 +154,7 @@
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"></LinearLayout>
+            android:layout_weight="0.2"></LinearLayout>
 
     </LinearLayout>
 
