@@ -12,9 +12,9 @@ import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Dispatcher;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 import es.ucm.petpal.presentacion.vista.Ayuda;
-import es.ucm.petpal.presentacion.vista.Bienvenido;
 import es.ucm.petpal.presentacion.vista.Configuracion;
 import es.ucm.petpal.presentacion.vista.Contexto;
+import es.ucm.petpal.presentacion.vista.Decision;
 import es.ucm.petpal.presentacion.vista.PetPalWebView;
 import es.ucm.petpal.presentacion.vista.VerPerfil;
 import es.ucm.petpal.presentacion.vista.VerPosts;
@@ -85,7 +85,7 @@ public class DispatcherImp extends Dispatcher {
 
             case ListaComandos.HAY_USUARIO:
                 TransferUsuario user = (TransferUsuario) datos;
-                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Bienvenido.class);
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Decision.class);
                 if(user != null){
                     hayUsuario.putExtra("existe", true);
                     hayUsuario.putExtra("color", user.getColor());

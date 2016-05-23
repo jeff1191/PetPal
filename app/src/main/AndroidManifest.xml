@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentacion.vista.Decision" />
+        <activity android:name=".presentacion.vista.Acceso" />
 
         <activity android:name=".presentacion.vista.MainActivity" />
 
@@ -52,6 +52,8 @@
         <activity android:name=".presentacion.vista.VerPosts" />
 
         <activity android:name=".presentacion.vista.InicioSesion" />
+
+        <activity android:name=".presentacion.vista.Decision" />
 
         <activity android:name=".presentacion.vista.Registro"
             android:windowSoftInputMode="adjustPan">

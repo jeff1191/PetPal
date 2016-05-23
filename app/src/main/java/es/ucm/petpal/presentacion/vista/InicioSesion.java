@@ -58,7 +58,7 @@ public class InicioSesion extends Activity{
     }
 
     public void volverDecision(View v){
-        startActivity(new Intent(this, Decision.class));
+        startActivity(new Intent(this, Acceso.class));
     }
 
     private boolean datosValidos(String nombre, String correo) {

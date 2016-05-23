@@ -2,33 +2,36 @@ package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
 
-import es.ucm.petpal.R;
-
+import es.ucm.petpal.presentacion.controlador.Controlador;
+import es.ucm.petpal.presentacion.controlador.ListaComandos;
 
 /**
- * Created by msalitu on 17/03/2016.
+ * Created by Juan Lu on 23/05/2016.
  */
-public class Decision extends Activity {
-
+public class Decision extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_decision);
-    }
+        //Hacer la comprobacion aqui, si no hay user que vaya a decision,
+        //si hay user que vaya directamente al main
+        //Tambien hay que darle un valor al tema actual: Configuracion.temaActual = usuario.getColor()
+        Contexto.getInstancia().setContext(this);
 
-    public void irAcceso(View v){
-        startActivity(new Intent(this, InicioSesion.class));
-    }
+        Controlador.getInstancia().ejecutaComando(ListaComandos.HAY_USUARIO, null);
 
-    public void irRegistro(View v){
-        startActivity(new Intent(this, Registro.class));
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            Configuracion.temaActual = bundle.getString("color");
+
+            if (!bundle.getBoolean("existe"))
+                startActivity(new Intent(this, Acceso.class));
+             else
+                startActivity(new Intent(this, MainActivity.class));
+
+        }
+        finish();
     }
 }
