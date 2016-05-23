@@ -8,8 +8,8 @@ import es.ucm.petpal.presentacion.controlador.comandos.imp.ConsultarUsuarioComan
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearPostComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EditarUsuarioComando;
-import es.ucm.petpal.presentacion.controlador.comandos.imp.EnviarCorreoComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.GenerarPDFComando;
+import es.ucm.petpal.presentacion.controlador.comandos.imp.HayUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerPostsComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerWebViewComando;
@@ -40,9 +40,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
             case ListaComandos.GENERAR_PDF:
                 ret = new GenerarPDFComando();
                 break;
-            case ListaComandos.ENVIAR_CORREO:
-                ret = new EnviarCorreoComando();
-                break;
             case ListaComandos.CREAR_POST:
                 ret = new CrearPostComando();
                 break;
@@ -51,6 +48,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.VER_POSTS:
                 ret = new VerPostsComando();
+                break;
+            case ListaComandos.HAY_USUARIO:
+                ret = new HayUsuarioComando();
                 break;
         }
 

@@ -16,7 +16,7 @@ import es.ucm.petpal.presentacion.controlador.ListaComandos;
 /**
  * Created by Juan Lu on 18/05/2016.
  */
-public class Acceso extends Activity{
+public class InicioSesion extends Activity{
 
     private EditText passUsuario;
     private EditText correoUsuario;

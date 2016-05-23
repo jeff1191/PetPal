@@ -8,29 +8,18 @@ import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import es.ucm.petpal.R;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
-import es.ucm.petpal.presentacion.controlador.comandos.Command;
-import es.ucm.petpal.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
 
 
 public class MainActivity extends Activity {
 
-    private TextView nombrePrincipal;
-    private TextView puntuacion;
-    private ImageView imagenPerfil;
-    private int request_code;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
+        /*Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
         TransferUsuario usuario = new TransferUsuario();
         try {
             usuario = (TransferUsuario) c.ejecutaComando(null);
@@ -38,7 +27,7 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
         // Completa los datos del usuario que se muestran en esta pantalla
-        Configuracion.temaActual = usuario.getColor();
+        Configuracion.temaActual = usuario.getColor();*/
         cargarTema();
         setContentView(R.layout.activity_main);
 
@@ -95,19 +84,6 @@ public class MainActivity extends Activity {
 
     public void verPosts(View v){
         Controlador.getInstancia().ejecutaComando(ListaComandos.VER_POSTS, null);
-    }
-
-    public void enviarCorreo(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if ((requestCode == request_code) && (resultCode == RESULT_OK)){
-            Bundle bundle = data.getExtras();
-            nombrePrincipal.setText(bundle.getString("nombreNuevo"));
-        }
     }
 
     public void cargarTema(){

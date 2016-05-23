@@ -75,9 +75,6 @@ public class NuevoPost extends Activity {
         ubicacion = (EditText) findViewById(R.id.ubicacionPost);
         descripcion = (EditText) findViewById(R.id.descripcionPost);
         guardarPost = (Button) findViewById(R.id.guardarPost);
-        final String tituloP = String.valueOf(titulo.getText());
-        final String ubicacionP = String.valueOf(ubicacion.getText());
-        final String descripcionP = String.valueOf(descripcion.getText());
 
         guardarPost.setOnClickListener(new AdapterView.OnClickListener() {
             @Override

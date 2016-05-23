@@ -12,6 +12,7 @@ import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.controlador.Dispatcher;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 import es.ucm.petpal.presentacion.vista.Ayuda;
+import es.ucm.petpal.presentacion.vista.Bienvenido;
 import es.ucm.petpal.presentacion.vista.Configuracion;
 import es.ucm.petpal.presentacion.vista.Contexto;
 import es.ucm.petpal.presentacion.vista.PetPalWebView;
@@ -80,6 +81,21 @@ public class DispatcherImp extends Dispatcher {
                 b.putStringArrayList("fechasPosts", listaFechas);
                 intent.putExtras(b);
                 Contexto.getInstancia().getContext().startActivity(intent);
+                break;
+
+            case ListaComandos.HAY_USUARIO:
+                TransferUsuario user = (TransferUsuario) datos;
+                Intent hayUsuario = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), Bienvenido.class);
+                if(user != null){
+                    hayUsuario.putExtra("existe", true);
+                    hayUsuario.putExtra("color", user.getColor());
+                }
+                else {
+                    hayUsuario.putExtra("existe", false);
+                    hayUsuario.putExtra("color", "AS_theme_azul");
+                }
+                hayUsuario.setFlags(hayUsuario.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Contexto.getInstancia().getContext().startActivity(hayUsuario);
                 break;
 
             default:
