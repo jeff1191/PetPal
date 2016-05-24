@@ -58,7 +58,6 @@ public class DispatcherImp extends Dispatcher {
                 Intent intent = new Intent(Contexto.getInstancia().getContext().getApplicationContext(), VerPosts.class);
                 List<TransferPost> postsModelo= (List<TransferPost>) datos;
                 ArrayList<String> listaImagenes= new ArrayList<String>();
-                ArrayList<Integer> listaIds = new ArrayList<Integer>();
                 ArrayList<String> listaNombres = new ArrayList<String>();
                 ArrayList<String> listaCiudades = new ArrayList<String>();
                 ArrayList<String> listaDescripciones = new ArrayList<String>();
@@ -67,13 +66,11 @@ public class DispatcherImp extends Dispatcher {
                 for(int i=0; i < postsModelo.size(); i++){
                     listaImagenes.add(postsModelo.get(i).getImagen());
                     listaCiudades.add(postsModelo.get(i).getUbicacion());
-                    listaIds.add(postsModelo.get(i).getId());
                     listaNombres.add(postsModelo.get(i).getTitulo());
                     listaDescripciones.add(postsModelo.get(i).getDescripcion());
                     listaFechas.add(formatFecha.format(postsModelo.get(i).getFecha()));
                 }
                 Bundle b = new Bundle();
-                b.putIntegerArrayList("listaIds", listaIds);
                 b.putStringArrayList("listaPosts", listaNombres);
                 b.putStringArrayList("imagenesPosts", listaImagenes);
                 b.putStringArrayList("ciudadesPosts", listaCiudades);

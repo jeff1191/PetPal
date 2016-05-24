@@ -28,11 +28,10 @@ public class SAUsuarioImp implements SAUsuario {
 	
 	public TransferUsuario editarUsuario(TransferUsuario datos) {
 		Dao<Usuario, Integer> daoUsuario;
-		TransferUsuario ret = new TransferUsuario();
 		try {
 			daoUsuario = getHelper().getUsuarioDao();
-			if (daoUsuario.idExists(1)) {
-				Usuario usuario = daoUsuario.queryForId(1);
+			if (daoUsuario.queryForAll().size() != 0) {
+				Usuario usuario = daoUsuario.queryForAll().get(0);
 				usuario.setNombre(datos.getNombre());
 				usuario.setAvatar(datos.getAvatar());
 				usuario.setColor(datos.getColor());
@@ -47,10 +46,6 @@ public class SAUsuarioImp implements SAUsuario {
 			e.printStackTrace();
 		}
 		return datos;
-	}
-	
-	public void sincronizar() {
-		
 	}
 
 	@Override
@@ -84,10 +79,10 @@ public class SAUsuarioImp implements SAUsuario {
 
 			daoUsuario = getHelper().getUsuarioDao();
 
-			if (!daoUsuario.idExists(1))
+			if (daoUsuario.queryForAll().size() == 0)
 				return null;
 			else {
-				Usuario u = daoUsuario.queryForId(1);
+				Usuario u = daoUsuario.queryForAll().get(0);
 				// metemos los datos en un transfer
 				transferUsuario.setId(u.getId());
 				if (u.getNombre() != null)

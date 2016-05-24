@@ -3,7 +3,6 @@ package es.ucm.petpal.presentacion.vista;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,6 @@ public class AdaptadorPosts extends BaseAdapter {
         TextView ciudadPost = (TextView) convertView.findViewById(R.id.ciudadPostList);
         ImageView imagenPost = (ImageView) convertView.findViewById(R.id.imagePostList);
         TextView fechaPost = (TextView) convertView.findViewById(R.id.fechaPostList);
-        Log.e("adaptadorposts", " weee ");
 
         nombrePost.setText(getItem(position));
         ciudadPost.setText(getUbicacion(position));

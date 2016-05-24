@@ -26,6 +26,8 @@ public class Decision extends Activity{
         if(bundle != null) {
             Configuracion.temaActual = bundle.getString("color");
 
+            NotificacionPublicidad.lanzarNotificacion("Publicidad", "20% dto. en recoge pelos, solo en FROSTY'S!");
+
             if (!bundle.getBoolean("existe"))
                 startActivity(new Intent(this, Acceso.class));
              else

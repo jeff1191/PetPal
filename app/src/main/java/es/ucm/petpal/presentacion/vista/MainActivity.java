@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,21 +18,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        /*Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario usuario = new TransferUsuario();
-        try {
-            usuario = (TransferUsuario) c.ejecutaComando(null);
-        } catch (commandException e) {
-            e.printStackTrace();
-        }
-        // Completa los datos del usuario que se muestran en esta pantalla
-        Configuracion.temaActual = usuario.getColor();*/
         cargarTema();
         setContentView(R.layout.activity_main);
-
-        // Esto es para solventar un error al enviar el correo
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         super.onCreate(savedInstanceState);
 

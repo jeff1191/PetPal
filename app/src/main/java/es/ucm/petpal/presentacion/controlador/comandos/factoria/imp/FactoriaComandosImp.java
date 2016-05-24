@@ -8,7 +8,6 @@ import es.ucm.petpal.presentacion.controlador.comandos.imp.ConsultarUsuarioComan
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearPostComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EditarUsuarioComando;
-import es.ucm.petpal.presentacion.controlador.comandos.imp.GenerarPDFComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.HayUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerAyudaComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerPostsComando;
@@ -36,9 +35,6 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO:
                 ret = new ConsultarUsuarioComando();
-                break;
-            case ListaComandos.GENERAR_PDF:
-                ret = new GenerarPDFComando();
                 break;
             case ListaComandos.CREAR_POST:
                 ret = new CrearPostComando();

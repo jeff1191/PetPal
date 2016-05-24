@@ -51,7 +51,9 @@
 
         <activity android:name=".presentacion.vista.VerPosts" />
 
-        <activity android:name=".presentacion.vista.InicioSesion" />
+        <activity android:name=".presentacion.vista.InicioSesion"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity android:name=".presentacion.vista.Decision" />
 
@@ -59,17 +61,6 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-
-        <service
-            android:name=".presentacion.notificaciones.ServicioNotificaciones"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":servicio_notificaciones" />
-
-        <receiver android:name=".presentacion.notificaciones.CargarNotificaciones" />
-        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
     </application>
 
 </manifest>
