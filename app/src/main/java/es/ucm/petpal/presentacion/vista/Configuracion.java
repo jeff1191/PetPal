@@ -49,7 +49,6 @@ public class Configuracion extends Activity {
     private EditText editarApellidos;
     private EditText editarCiudad;
     private EditText editarTelefono;
-    private EditText editarEmail;
     private Button aceptar;
     static String temaActual;
     private String[] nombresColores={ "Azul", "Rojo", "Rosa", "Verde",
@@ -73,13 +72,12 @@ public class Configuracion extends Activity {
             editarApellidos = (EditText) findViewById(R.id.apellidosConfig);
             editarCiudad = (EditText) findViewById(R.id.ciudadConfig);
             editarTelefono = (EditText) findViewById(R.id.telefonoConfig);
-            editarEmail = (EditText) findViewById(R.id.emailConfig);
+
             aceptar = (Button) findViewById(R.id.envioNuevaConfig);
             temaActual = usuario.getColor();
             temaParcial = temaActual;
             rutaImagen = usuario.getAvatar();
             imagenConfiguracion = (ImageView) findViewById(R.id.imagenConfig);
-
             spinnerColors = (Spinner) findViewById(R.id.cambiarColor);
             ////////Spinner color ///////
             nombresColoresSistema();
@@ -130,7 +128,6 @@ public class Configuracion extends Activity {
             editarNombre.setText(usuario.getNombre());
             editarApellidos.setText(usuario.getApellidos());
             editarCiudad.setText(usuario.getCiudad());
-            editarEmail.setText(usuario.getEmail());
             editarTelefono.setText(usuario.getTelefono());
 
             aceptar.setOnClickListener(new View.OnClickListener() {
@@ -139,10 +136,9 @@ public class Configuracion extends Activity {
                     String nombreU = String.valueOf(editarNombre.getText());
                     String apellidosU = String.valueOf(editarApellidos.getText());
                     String ciudadU = String.valueOf(editarCiudad.getText());
-                    String emailU = String.valueOf(editarEmail.getText());
                     String telefonoU = String.valueOf(editarTelefono.getText());
 
-                    if (datosUsuarioValidos(nombreU, emailU)) {
+                    if (datosUsuarioValidos(nombreU)) {
                         TransferUsuario editarUsuario = new TransferUsuario();
                         editarUsuario.setNombre(String.valueOf(editarNombre.getText()));
                         temaActual = temaParcial;
@@ -152,7 +148,6 @@ public class Configuracion extends Activity {
                         editarUsuario.setApellidos(apellidosU);
                         editarUsuario.setCiudad(ciudadU);
                         editarUsuario.setTelefono(telefonoU);
-                        editarUsuario.setEmail(emailU);
 
                         Controlador.getInstancia().ejecutaComando(ListaComandos.EDITAR_USUARIO, editarUsuario);
                         Toast.makeText(getApplicationContext(), "El usuario ha sido modificado con éxito", Toast.LENGTH_SHORT).show();
@@ -172,15 +167,10 @@ public class Configuracion extends Activity {
 
     }
 
-    public boolean datosUsuarioValidos(String nombre, String correo){
+    public boolean datosUsuarioValidos(String nombre){
 
-        if(!nombre.toString().matches("") &&
-                !correo.toString().matches("")) {
-
-            if(correo.toString().matches(PATRON_EMAIL)){
+        if(!nombre.toString().matches("")) {
                 return true;
-            }else
-                mostrarMensajeError("Campo email inválido");
         }else
             mostrarMensajeError("Algún campo obligatorio es vacío");
 

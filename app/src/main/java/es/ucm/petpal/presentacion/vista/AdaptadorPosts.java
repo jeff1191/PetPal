@@ -69,7 +69,7 @@ public class AdaptadorPosts extends BaseAdapter {
         ciudadPost.setText(ciudadExacta(getUbicacion(position)));
         fechaPost.setText(getFecha(position));
 
-        if(getItem(position).equals(""))
+        if(!getFoto(position).equals(""))
             imagenPost.setImageBitmap(BitmapFactory.decodeFile(getFoto(position)));
         else
             imagenPost.setImageResource(R.drawable.avatar);
