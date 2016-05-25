@@ -63,13 +63,13 @@ public class Ayuda extends Activity{
                     mImage.setImageResource(R.drawable.ayuda_main);
                     break;
                 case "configuracion":
-                    mImage.setImageResource(R.drawable.ayuda_main);
+                    mImage.setImageResource(R.drawable.ayuda_configuracion);
                     break;
                 case "nuevoPost":
-                    mImage.setImageResource(R.drawable.ayuda_main);
+                    mImage.setImageResource(R.drawable.ayuda_nuevo_post);
                     break;
                 case "verPosts":
-                    mImage.setImageResource(R.drawable.ayuda_main);
+                    mImage.setImageResource(R.drawable.ayuda_mis_posts);
                     break;
             }
         }

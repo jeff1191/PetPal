@@ -9,6 +9,6 @@ public interface SAPost {
 
     void crearPost(TransferPost transferPost);
 
-    void List<TransferPost> consultarPosts();
+    List<TransferPost> consultarPosts();
 
 }
