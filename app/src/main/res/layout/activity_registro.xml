@@ -54,7 +54,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/nombreReg"
-            android:hint="Nombre" />
+            android:hint="Nombre (*)" />
         <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -72,7 +72,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/passReg"
-            android:hint="Contraseña" />
+            android:hint="Contraseña (*)" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -99,7 +99,7 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailReg"
-            android:hint="Email" />
+            android:hint="Email (*)" />
 
 
     </LinearLayout>

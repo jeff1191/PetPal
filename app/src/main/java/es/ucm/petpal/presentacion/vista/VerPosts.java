@@ -36,7 +36,7 @@ public class VerPosts extends Activity{
 
         Bundle bundle = getIntent().getExtras();
 
-        if(bundle != null){
+        if(bundle.getStringArrayList("listaPosts") != null){
             final ArrayList<String> listaP = bundle.getStringArrayList("listaPosts");
             ArrayList<String> imagenesP = bundle.getStringArrayList("imagenesPosts");
             ArrayList<String> ciudadesP = bundle.getStringArrayList("ciudadesPosts");
@@ -66,7 +66,7 @@ public class VerPosts extends Activity{
                                 new ContextThemeWrapper(Contexto.getInstancia().getContext(),
                                         R.style.Theme_AppCompat_Light_Dialog));
                         builder.setMessage(descripcionesP.get(position))
-                                .setTitle(listaP.get(position));
+                                .setTitle(listaP.get(position) + " (descripción)");
                         builder.create().show();
 
                     }

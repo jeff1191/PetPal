@@ -32,9 +32,10 @@
                     android:layout_height="0dp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:id="@+id/fechaPostList"
+                    android:focusable="false"
                     android:layout_weight="1"
-                    android:gravity="right" />
-
+                    android:gravity="right">
+                </TextView>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

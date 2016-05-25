@@ -74,10 +74,13 @@ public class NuevoPost extends Activity {
     private Button guardarPost;
 
     private Location loc;
+    private boolean isGPSEnabled;
+    private boolean isNetworkEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
+        Contexto.getInstancia().setContext(this);
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_crear_publicacion);
@@ -89,41 +92,93 @@ public class NuevoPost extends Activity {
         descripcion = (EditText) findViewById(R.id.descripcionPost);
         guardarPost = (Button) findViewById(R.id.guardarPost);
 
-
         obtenerUbicacion.setVisibility(View.VISIBLE);
         ubicacion.setVisibility(View.GONE);
 
         // Configuración del sistema de localización
-        LocationManager mLocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        MyLocationListener mLocListener = new MyLocationListener();
-        mLocListener.setMainActivity(this);
-        try {
-            mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) mLocListener);
-        } catch (SecurityException s) {
+        final LocationManager mLocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        }
+        //variable para ver si el estado del GPS
+        isGPSEnabled = mLocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        //variable para ver si el estado de la red
+        isNetworkEnabled =  mLocManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        final MyLocationListener mLocListener = new MyLocationListener();
+        mLocListener.setMainActivity(NuevoPost.this);
 
         obtenerUbicacion.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
-                    Geocoder geoCoder = new Geocoder(v.getContext(), Locale.getDefault());
-                    StringBuilder builder = new StringBuilder();
-                    try {
-                        List<Address> address = geoCoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
-                        int maxLines = address.get(0).getMaxAddressLineIndex();
-                        for (int i=0; i<maxLines; i++) {
-                            String addressStr = address.get(0).getAddressLine(i);
-                            builder.append(addressStr);
-                            builder.append(" ");
-                        }
+                //Hago un pequeño truco por si el gps nos deja tirados
+                if (!isGPSEnabled && !isNetworkEnabled) {
+                    mostrarMensajeError("No hay forma de obtener la localizacion");
+                }
+                else{
+                    if (isGPSEnabled) {
+                        Log.e("meterseGPS", "ubicacion a buscar");
+                        mLocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mLocListener);
+                        if(mLocManager != null){
+                            loc = mLocManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if(loc != null){
+                                try {
+                                    Log.e("meterseGPS","dentro");
+                                    Geocoder geoCoder = new Geocoder(Contexto.getInstancia().getContext(), Locale.getDefault());
+                                    StringBuilder builder = new StringBuilder();
+                                    List<Address> address = geoCoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
+                                    int maxLines = address.get(0).getMaxAddressLineIndex();
+                                    for (int i = 0; i < maxLines; i++) {
+                                        String addressStr = address.get(0).getAddressLine(i);
+                                        builder.append(addressStr);
+                                        builder.append(" ");
+                                    }
+                                    String finalAddress = builder.toString(); //This is the complete address.
+                                    Log.e("meterseGPS", finalAddress);
+                                    ubicacion.setText(finalAddress);
+                                    obtenerUbicacion.setVisibility(View.GONE);
+                                    ubicacion.setVisibility(View.VISIBLE);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
-                        String finalAddress = builder.toString(); //This is the complete address.
-                        ubicacion.setText(finalAddress);
-                        obtenerUbicacion.setVisibility(View.GONE);
-                        ubicacion.setVisibility(View.VISIBLE);
-                    } catch (IOException e) {}
-                    catch (NullPointerException e) {}
+                            }
+                            else{
+                                Log.e("meterseGPS","loc fallo");
+                                Log.e("meterseRED", "ubicacion a buscar");
+                                mLocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mLocListener);
+                                if (mLocManager != null) {
+                                    loc = mLocManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                                    if (loc != null) {
+                                        try {
+                                            Log.e("meterseRED", "dentro");
+                                            Geocoder geoCoder = new Geocoder(Contexto.getInstancia().getContext(), Locale.getDefault());
+                                            StringBuilder builder = new StringBuilder();
+                                            Log.e("meterseRED", loc.getLatitude()+" "+loc.getLongitude());
+                                            List<Address> address = geoCoder.getFromLocation(loc.getLatitude(), loc.getLongitude(), 1);
+                                            Log.e("meterseRED", "coge bien lat y long");
+                                            Log.e("meterseRED", loc.getLatitude()+" "+loc.getLongitude());
+                                            int maxLines = address.get(0).getMaxAddressLineIndex();
+                                            for (int i = 0; i < maxLines; i++) {
+                                                String addressStr = address.get(0).getAddressLine(i);
+                                                builder.append(addressStr);
+                                                builder.append(" ");
+                                            }
+                                            String finalAddress = builder.toString(); //This is the complete address.
+                                            Log.e("meterseRED", finalAddress);
+                                            ubicacion.setText(finalAddress);
+                                            obtenerUbicacion.setVisibility(View.GONE);
+                                            ubicacion.setVisibility(View.VISIBLE);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                        mostrarMensajeError("El GPS no esta activado");
+
                 }
             }
         });
@@ -413,7 +468,6 @@ public class NuevoPost extends Activity {
 
         @Override
         public void onProviderEnabled(String provider) {
-
 
         }
 

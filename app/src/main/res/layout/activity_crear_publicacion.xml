@@ -101,31 +101,54 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:editable="true"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
-                <Button
-                    android:layout_width="206dp"
-                    android:layout_height="wrap_content"
-                    android:text="Obtener ubicación"
-                    android:id="@+id/obtenerUbicacion"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="0.5"
-                    android:visibility="visible" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"></LinearLayout>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Obtener ubicación"
+                        android:id="@+id/obtenerUbicacion"
+                        android:layout_weight="1"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:id="@+id/textoUbicacion"
+                        android:gravity="center"
+                        android:ems="13"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1.5" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3">
-
-                    <TextView
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:id="@+id/textoUbicacion"
-                        android:layout_gravity="center"
-                        android:gravity="center_horizontal"
-                        android:visibility="gone" />
+                    android:layout_weight="3"
+                    android:layout_marginTop="10dp">
 
                     <EditText
                         android:layout_width="wrap_content"

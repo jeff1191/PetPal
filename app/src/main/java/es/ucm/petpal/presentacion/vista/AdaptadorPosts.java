@@ -66,7 +66,7 @@ public class AdaptadorPosts extends BaseAdapter {
         TextView fechaPost = (TextView) convertView.findViewById(R.id.fechaPostList);
 
         nombrePost.setText(getItem(position));
-        ciudadPost.setText(getUbicacion(position));
+        ciudadPost.setText(ciudadExacta(getUbicacion(position)));
         fechaPost.setText(getFecha(position));
 
         if(getItem(position).equals(""))
@@ -95,6 +95,11 @@ public class AdaptadorPosts extends BaseAdapter {
     public void setDatosFechas(ArrayList<String> fechas) {
         fechasPosts=fechas;
         notifyDataSetChanged();
+    }
+
+    public String ciudadExacta(String sinEditar){
+        String[] palabras = sinEditar.split(" ");
+        return palabras[palabras.length-1];
     }
 
 }
