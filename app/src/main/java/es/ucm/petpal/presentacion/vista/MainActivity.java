@@ -89,14 +89,10 @@ public class MainActivity extends Activity {
     }
 
     public void nuevoPost(View v) {
-        Contexto.getInstancia().getContext().startActivity(new Intent(
-                Contexto.getInstancia().getContext().getApplicationContext(), NuevoPost.class));
+        //Necesario cuando se envia el post para que se envíe al servidor
+        Controlador.getInstancia().ejecutaComando(ListaComandos.CONSULTAR_USUARIO_NUEVO_POST, null);
     }
 
-    public void enviarCorreo(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.GENERAR_PDF, null);
-        Controlador.getInstancia().ejecutaComando(ListaComandos.ENVIAR_CORREO, null);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

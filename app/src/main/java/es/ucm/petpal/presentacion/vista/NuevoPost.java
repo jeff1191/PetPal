@@ -13,18 +13,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import es.ucm.petpal.R;
@@ -61,8 +67,18 @@ public class NuevoPost extends Activity {
     private EditText ubicacion;
     private EditText descripcion;
 
+
+    private Bitmap bitmap;
+
     private Button guardarPost;
 
+    private TransferUsuario usuarioActivo;
+
+    //String fundamental que contiene la hora en que se hizo el post en el servidor, esto lo hacemos para subir la imagen correctamente
+    //La imagen la guardamos con la fecha y hora del servidor por ejemplo: 2016-15-12 12-20-11
+    private String fechaHoraImagen;
+
+    private Integer idUsuarioServer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
@@ -75,29 +91,19 @@ public class NuevoPost extends Activity {
         ubicacion = (EditText) findViewById(R.id.ubicacionPost);
         descripcion = (EditText) findViewById(R.id.descripcionPost);
         guardarPost = (Button) findViewById(R.id.guardarPost);
-        final String tituloP = String.valueOf(titulo.getText());
-        final String ubicacionP = String.valueOf(ubicacion.getText());
-        final String descripcionP = String.valueOf(descripcion.getText());
 
-        guardarPost.setOnClickListener(new AdapterView.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tituloP = String.valueOf(titulo.getText());
-                String ubicacionP = String.valueOf(ubicacion.getText());
-                String descripcionP = String.valueOf(descripcion.getText());
 
-                if(datosPostValidos(tituloP, ubicacionP, descripcionP)){
-                    TransferPost nuevoPost = new TransferPost();
-                    nuevoPost.setTitulo(tituloP);
-                    nuevoPost.setDescripcion(descripcionP);
-                    nuevoPost.setUbicacion(ubicacionP);
-                    nuevoPost.setImagen(rutaImagen);
-                    Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_POST, nuevoPost);
-                    Toast.makeText(getApplicationContext(), "El post ha sido creado con éxito", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent (Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class));
-                }
-            }
-        });
+
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+
+            usuarioActivo = (TransferUsuario) getIntent().getExtras().getSerializable("usuarioNuevoPost");
+
+            Log.e("NOMBRE_USER",usuarioActivo.getNombre());
+            Log.e("IMAGEN",usuarioActivo.getAvatar());
+        }
+
 
     }
 
@@ -118,35 +124,6 @@ public class NuevoPost extends Activity {
         errorNombre.show();
     }
 
-    public void cargarTema(){
-        switch (Configuracion.temaActual){
-            case "AS_theme_azul":
-                setTheme(R.style.AS_tema_azul);
-                break;
-            case "AS_theme_rojo":
-                setTheme(R.style.AS_tema_rojo);
-                break;
-            case "AS_theme_rosa":
-                setTheme(R.style.AS_tema_rosa);
-                break;
-            case "AS_theme_verde":
-                setTheme(R.style.AS_tema_verde);
-                break;
-            case "AS_theme_negro":
-                setTheme(R.style.AS_tema_negro);
-                break;
-        }
-    }
-
-
-    public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
-    }
-
-    public void ayuda(View v){
-        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "nuevoPost");
-    }
 
     public void nuevaImagenPost(View v) {
         final CharSequence[] items = { "Hacer foto", "Elegir de la galeria", "Imagen por defecto" };
@@ -180,9 +157,9 @@ public class NuevoPost extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == CAMARA) {
-                Bitmap imagen = (Bitmap) data.getExtras().get("data");
+                bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                imagen.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
                 File destination = new File(Environment.getExternalStorageDirectory(),
                         System.currentTimeMillis() + ".jpg");
                 FileOutputStream fo;
@@ -196,7 +173,7 @@ public class NuevoPost extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                imagenPost.setImageBitmap(imagen);
+                imagenPost.setImageBitmap(bitmap);
                 rutaImagen = destination.getPath();
             } else if (requestCode == SELECCIONAR_GALERIA) {
                 Uri selectedImageUri = data.getData();
@@ -207,7 +184,6 @@ public class NuevoPost extends Activity {
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
                 cursor.moveToFirst();
                 String selectedImagePath = cursor.getString(column_index);
-                Bitmap bm;
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 BitmapFactory.decodeFile(selectedImagePath, options);
@@ -218,47 +194,89 @@ public class NuevoPost extends Activity {
                     scale *= 2;
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(selectedImagePath, options);
-                imagenPost.setImageBitmap(bm);
+                bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+                imagenPost.setImageBitmap(bitmap);
                 rutaImagen=selectedImagePath;
             }
         }
     }
-
     public void crearPublicacion(View v){
-        Toast errorNombre =
+        String tituloP = String.valueOf(titulo.getText());
+        String ubicacionP = String.valueOf(ubicacion.getText());
+        String descripcionP = String.valueOf(descripcion.getText());
+
+        if(datosPostValidos(tituloP, ubicacionP, descripcionP)){
+            TransferPost nuevoPost = new TransferPost();
+            nuevoPost.setTitulo(tituloP);
+            nuevoPost.setDescripcion(descripcionP);
+            nuevoPost.setUbicacion(ubicacionP);
+            nuevoPost.setImagen(rutaImagen);
+            Log.e("CREANDO DATOS", "LOCAL");
+            subirDatosServer(nuevoPost); //subir al servidor a traves de Volley
+            Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_POST, nuevoPost);
+        }
+    }
+
+    private void subirDatosServer(final TransferPost post){
+
+
+        String newURL = ConfiguracionWebService.GET_USER_EMAIL + "?correo=" + usuarioActivo.getEmail();
+        Log.d("url getUsuario", newURL);
+        // / te traes el usuario y lo insertas en la bdd
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                newURL, (String)null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("onResponse getUsuario", response.toString());
+
+                try {
+
+                    JSONObject usuario = response.getJSONObject("usuario");
+                    idUsuarioServer = Integer.valueOf(usuario.getString("idUsuario"));
+                    Log.e("onResponse getUsuario", usuario.toString());
+                    insertarPost(post);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),
+                            "Error: " + "Usuario/contraseña incorrectos",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("obtenerIDUsuarioServer", "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        "AQUI VIENE LA MAGIA", Toast.LENGTH_SHORT);
+                        error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        errorNombre.show();
+        VolleySingleton.getInstance(Contexto.getInstancia().getContext()).addToRequestQueue(jsonObjReq);
 
-        TransferUsuario usuario = new TransferUsuario();
-        usuario.setId(100);
-        usuario.setNombre("PEPE");
-        usuario.setAvatar("");
-        TransferPost post = new TransferPost();
-        post.setImagen(rutaImagen);
-        post.setId(100);
-        post.setTitulo(titulo.getText().toString());
-        post.setDescripcion(descripcion.getText().toString());
-        post.setUbicacion(ubicacion.getText().toString());
-        post.setUsuario(usuario);
+
+    }
+
+    private void insertarPost(TransferPost post) {
+        post.setUsuario(usuarioActivo);
         post.setFecha(new Date());
 
-    ///Peticion al servidor localhost(en este caso)
+        ///Peticion al servidor localhost(en este caso)
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
-        map.put("idUsuario", post.getUsuario().getId().toString());
+        //map.put("correo", post.getUsuario().getEmail());
         map.put("titulo", post.getTitulo());
         map.put("descripcion", post.getDescripcion());
         map.put("ubicacion", post.getUbicacion());
         map.put("imagen", post.getImagen());
         map.put("fecha", new Date().toString());
+        map.put("idUsuario", idUsuarioServer.toString());
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
 
         // Depurando objeto Json...
         Log.d("NUEVO_POST", jobject.toString());
-
 
         // Actualizar datos en el servidor
         VolleySingleton.getInstance(this).addToRequestQueue(
@@ -269,6 +287,19 @@ public class NuevoPost extends Activity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                try {
+                                    fechaHoraImagen=response.getString("mensaje");
+                                    if(bitmap != null)
+                                        subirImageServer();
+                                    if(!usuarioActivo.getAvatar().equals(""))
+                                        subirImageUsuarioServer();
+
+                                    //Volver a la MainActivity
+                                    startActivity(new Intent(Contexto.getInstancia().getContext().getApplicationContext(), MainActivity.class));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.e("MOSTRAR_MENSAJE",fechaHoraImagen);
                                 mostrarMensaje(response);
                             }
                         },
@@ -294,18 +325,93 @@ public class NuevoPost extends Activity {
                     }
                 }
         );
-
-
-
     }
 
+    private void subirImageServer(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ConfiguracionWebService.UPLOAD_IMAGE_POST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                      //  Toast.makeText(Contexto.getInstancia().getContext(), s , Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("imagenPost error", volleyError.getMessage().toString());
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                //Convertendo de bitMap a String
+                String imagenNuevoPost = getStringImage(bitmap);
+
+                Map<String,String> params = new Hashtable<String, String>();
+                params.put("imagenPost", imagenNuevoPost);
+                params.put("idUsuario", String.valueOf(idUsuarioServer));
+                params.put("fechaSubida", fechaHoraImagen);
+             return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        //añadir a la cola de peticiones
+        requestQueue.add(stringRequest);
+    }
+
+    private void subirImageUsuarioServer(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ConfiguracionWebService.UPLOAD_IMAGE_USER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        //Showing toast message of the response
+                        //  Toast.makeText(Contexto.getInstancia().getContext(), s , Toast.LENGTH_LONG).show();
+                        Log.d("imagenUsuario ok", s);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+//                        Log.d("imagenUsuario error", volleyError.getMessage().toString());
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Bitmap bmUsuario= convertirBitmap(usuarioActivo.getAvatar());
+
+                //Convirtiendo de bitMap a String
+                String imagenUsuario = getStringImage(bmUsuario);
+
+
+                Map<String,String> params = new Hashtable<String, String>();
+
+                //poniendo parametros para las imagenes
+                params.put("imagenUsuario", imagenUsuario);
+                params.put("correo", usuarioActivo.getEmail());
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        //añadir a la cola de peticiones
+        requestQueue.add(stringRequest);
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
     private void mostrarMensaje(JSONObject response) {
 
         try {
             // Obtener estado
             String estado = response.getString("estado");
             // Obtener mensaje
-            String mensaje = response.getString("mensaje");
 
             switch (estado) {
                 case "1":
@@ -315,7 +421,8 @@ public class NuevoPost extends Activity {
                                     "Post realizado correctamente", Toast.LENGTH_SHORT);
 
                     exito.show();
-                    this.finish();
+
+
                     break;
 
                 case "2":
@@ -334,4 +441,43 @@ public class NuevoPost extends Activity {
         }
 
     }
+
+    //Se usa para enviar al servidor la imagen bitmap
+    public Bitmap convertirBitmap(String path){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap imagen = BitmapFactory.decodeFile(path, options);
+        return imagen;
+    }
+
+    public void cargarTema(){
+        switch (Configuracion.temaActual){
+            case "AS_theme_azul":
+                setTheme(R.style.AS_tema_azul);
+                break;
+            case "AS_theme_rojo":
+                setTheme(R.style.AS_tema_rojo);
+                break;
+            case "AS_theme_rosa":
+                setTheme(R.style.AS_tema_rosa);
+                break;
+            case "AS_theme_verde":
+                setTheme(R.style.AS_tema_verde);
+                break;
+            case "AS_theme_negro":
+                setTheme(R.style.AS_tema_negro);
+                break;
+        }
+    }
+
+
+    public void volver(View v){
+        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
+        startActivity(pantallaPrincipal);
+    }
+
+    public void ayuda(View v){
+        Controlador.getInstancia().ejecutaComando(ListaComandos.AYUDA, "nuevoPost");
+    }
+
 }

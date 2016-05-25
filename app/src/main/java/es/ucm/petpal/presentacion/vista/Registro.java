@@ -38,7 +38,7 @@ public class Registro extends Activity {
     private EditText ciudadUsuario;
     private EditText telefonoUsuario;
     private EditText emailUsuario;
-
+    private boolean ret = false;
     private static final String PATRON_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -82,47 +82,53 @@ public class Registro extends Activity {
             else{
                 crearUsuario.setTelefono("");
             }
-            //if(realizarRegistroWeb(crearUsuario)){
-                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
-                startActivity(new Intent(this, MainActivity.class));
-            //}
+            if(realizarRegistroWeb(crearUsuario,pass)){
+            }
         }
 
     }
 
-    private boolean realizarRegistroWeb(TransferUsuario crearUsuario) {
+    private boolean realizarRegistroWeb(final TransferUsuario crearUsuario, String pass) {
         ///Peticion al servidor localhost(en este caso)
         HashMap<String, String> map = new HashMap<>();// Mapeo previo
+
         map.put("nombre", crearUsuario.getNombre());
         map.put("apellidos", crearUsuario.getApellidos());
         map.put("avatar", crearUsuario.getAvatar());
         map.put("ciudad", crearUsuario.getCiudad());
         map.put("telefono", crearUsuario.getTelefono());
-        map.put("email", new Date().toString());
-        map.put("contrasenya", new Date().toString());
+        map.put("email", crearUsuario.getEmail());
+        map.put("contrasenya", pass);
+
+
+
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
 
         // Depurando objeto Json...
         Log.d("NUEVO_USUARIO", jobject.toString());
 
-        final boolean[] terminar = {false};
+        ret = false;
         // Actualizar datos en el servidor
         VolleySingleton.getInstance(this).addToRequestQueue(
                 new JsonObjectRequest(
                         Request.Method.POST,
-                        ConfiguracionWebService.INSERT_POST,
+                        ConfiguracionWebService.INSERT_USER,
                         jobject,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                terminar[0] =true;
+                                ret=true;
+                                Log.d("NUEVO_USUARIO_RESPUESTA", response.toString());
+                                Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                terminar[0] =false;
+                                ret=false;
+                                Log.d("NUEVO_USUARIO_ERROR", error.toString());
                             }
                         }
 
@@ -141,7 +147,7 @@ public class Registro extends Activity {
                     }
                 }
         );
-        return terminar[0];
+        return ret;
     }
 
     public void volverDecision(View v){
