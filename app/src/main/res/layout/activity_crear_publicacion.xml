@@ -101,26 +101,54 @@
                     android:layout_weight="1"
                     android:layout_gravity="center"
                     android:editable="true"
-                    android:layout_marginTop="10dp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:id="@+id/ubicacionPost"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:ems="13"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:editable="true"
-                    android:inputType="text"
-                    android:hint="Nueva ubicación" />
+                    android:layout_marginBottom="10dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"></LinearLayout>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Obtener ubicación"
+                        android:id="@+id/obtenerUbicacion"
+                        android:layout_weight="1"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:id="@+id/textoUbicacion"
+                        android:gravity="center"
+                        android:ems="13"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1.5" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3">
+                    android:layout_weight="3"
+                    android:layout_marginTop="10dp">
 
                     <EditText
                         android:layout_width="wrap_content"

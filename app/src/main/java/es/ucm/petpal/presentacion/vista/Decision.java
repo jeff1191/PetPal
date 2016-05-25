@@ -2,55 +2,38 @@ package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
 
-import es.ucm.petpal.R;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
+import es.ucm.petpal.presentacion.controlador.Controlador;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
-import es.ucm.petpal.presentacion.controlador.comandos.Command;
-import es.ucm.petpal.presentacion.controlador.comandos.exceptions.commandException;
-import es.ucm.petpal.presentacion.controlador.comandos.factoria.FactoriaComandos;
-
 
 /**
- * Created by msalitu on 17/03/2016.
+ * Created by Juan Lu on 23/05/2016.
  */
-public class Decision extends Activity {
-
+public class Decision extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Hacer la comprobacion aqui, si no hay user que vaya a decision,
+        //si hay user que vaya directamente al main
+        //Tambien hay que darle un valor al tema actual: Configuracion.temaActual = usuario.getColor()
         Contexto.getInstancia().setContext(this);
-        Command c = FactoriaComandos.getInstancia().getCommand(ListaComandos.CONSULTAR_USUARIO);
-        TransferUsuario cargarUsuario;
-        try {
-            cargarUsuario = (TransferUsuario) c.ejecutaComando(null);
 
-            if (cargarUsuario != null){
-                Intent intent = new Intent().setClass(Decision.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-            else{
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                requestWindowFeature(Window.FEATURE_NO_TITLE);
-                setContentView(R.layout.activity_decision);
-            }
+        Controlador.getInstancia().ejecutaComando(ListaComandos.HAY_USUARIO, null);
 
-        } catch (commandException e) {
-            e.printStackTrace();
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            Configuracion.temaActual = bundle.getString("color");
+
+            NotificacionPublicidad.lanzarNotificacion("Publicidad", "20% dto. en recoge pelos, solo en FROSTY'S!");
+
+            if (!bundle.getBoolean("existe"))
+                startActivity(new Intent(this, Acceso.class));
+             else
+                startActivity(new Intent(this, MainActivity.class));
+
         }
-
-    }
-
-    public void irAcceso(View v){
-        startActivity(new Intent(this, Acceso.class));
-    }
-
-    public void irRegistro(View v){
-        startActivity(new Intent(this, Registro.class));
+        finish();
     }
 }

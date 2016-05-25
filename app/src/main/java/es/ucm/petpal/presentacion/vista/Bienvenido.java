@@ -14,7 +14,6 @@ import es.ucm.petpal.R;
 
 public class Bienvenido extends Activity {
     private static final long DELAY = 2000;
-    public boolean sincronizacion = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +33,17 @@ public class Bienvenido extends Activity {
         toast1.show();
 
 
-       TimerTask task = new TimerTask() {
-           @Override
-           public void run() {
-               Intent mainIntent = new Intent().setClass(
-                       Bienvenido.this, Decision.class);
-               startActivity(mainIntent);
-               finish();
-           }
-       };
-       Timer timer = new Timer();
-       timer.schedule(task, DELAY);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent().setClass(
+                        Bienvenido.this, Decision.class);
+                startActivity(mainIntent);
+                finish();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, DELAY);
+
     }
 }

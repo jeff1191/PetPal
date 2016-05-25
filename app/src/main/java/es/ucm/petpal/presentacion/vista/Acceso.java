@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import es.ucm.petpal.presentacion.controlador.Dispatcher;
 import es.ucm.petpal.presentacion.controlador.ListaComandos;
 import es.ucm.petpal.presentacion.web.ConfiguracionWebService;
 import es.ucm.petpal.presentacion.web.VolleySingleton;
+
 
 /**
  * Created by Juan Lu on 18/05/2016.
@@ -140,4 +142,5 @@ public class Acceso extends Activity{
                         msg, Toast.LENGTH_SHORT);
         errorNombre.show();
     }
+    
 }

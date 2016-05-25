@@ -10,9 +10,10 @@ public class ListaComandos {
     public static final String CONFIGURACION = "configuracion";
     public static final String EDITAR_USUARIO = "editarUsuario";
     public static final String CONSULTAR_USUARIO = "cargarUsuario";
-    public static final String ENVIAR_CORREO = "enviarCorreo";
     public static final String CREAR_POST = "crearPost";
     public static final String CONSULTAR_WEB_VIEW = "cargarWebView";
+    public static final String VER_POSTS = "verPosts";
+    public static final String HAY_USUARIO = "hayUsuario";
 
     public static final String CONSULTAR_USUARIO_NUEVO_POST = "consultarUsuarioNuevoPost" ;
 }

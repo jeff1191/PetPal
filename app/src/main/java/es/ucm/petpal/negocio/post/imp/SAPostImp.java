@@ -1,28 +1,18 @@
 package es.ucm.petpal.negocio.post.imp;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-import es.ucm.petpal.R;
 import es.ucm.petpal.integracion.DBHelper;
 import es.ucm.petpal.integracion.Post;
 import es.ucm.petpal.integracion.Usuario;
-import es.ucm.petpal.negocio.factoria.FactoriaSA;
 import es.ucm.petpal.negocio.post.SAPost;
 import es.ucm.petpal.negocio.post.TransferPost;
-import es.ucm.petpal.negocio.usuario.SAUsuario;
-import es.ucm.petpal.negocio.usuario.TransferUsuario;
 import es.ucm.petpal.presentacion.vista.Contexto;
 
 /**
@@ -41,36 +31,6 @@ public class SAPostImp implements SAPost {
         return mDBHelper;
     }
 
-    public static File crearFichero(String nombreFichero) throws IOException {
-        File ruta = getRuta();
-        File fichero = null;
-        if (ruta != null)
-            fichero = new File(ruta, nombreFichero);
-        return fichero;
-    }
-
-    public static File getRuta() {
-        // El fichero será almacenado en un directorio dentro del directorio Descargas
-        File ruta = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment
-                .getExternalStorageState())) {
-            ruta = new File(
-                    Environment
-                            .getExternalStoragePublicDirectory(
-                                    Environment.DIRECTORY_DOWNLOADS),
-                    NOMBRE_DIRECTORIO);
-
-            if (ruta != null) {
-                if (!ruta.mkdirs()) {
-                    if (!ruta.exists()) {
-                        return null;
-                    }
-                }
-            }
-        }
-        return ruta;
-    }
-    
     @Override
     public void crearPost(TransferPost transferPost) {
         Dao<Post, Integer> daoPost;
@@ -79,7 +39,7 @@ public class SAPostImp implements SAPost {
             daoPost = getHelper().getPostDao();
             daoUsuario = getHelper().getUsuarioDao();
 
-            Usuario u = daoUsuario.queryForId(1);
+            Usuario u = daoUsuario.queryForAll().get(0);
 
             Post post = new Post();
             post.setTitulo(transferPost.getTitulo());
@@ -95,6 +55,25 @@ public class SAPostImp implements SAPost {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public List<TransferPost> consultarPosts() {
+        Dao<Post, Integer> eventos;
+        List<Post> listaPosts = null;
+        List<TransferPost> transferPosts = new ArrayList<TransferPost>();
+        try {
+            eventos = getHelper().getPostDao();
+            listaPosts= eventos.queryForAll();
+            for(int i = 0; i < listaPosts.size(); i++)
+                transferPosts.add(new TransferPost(listaPosts.get(i).getId(), listaPosts.get(i).getFecha(),
+                        listaPosts.get(i).getTitulo(), listaPosts.get(i).getUbicacion(),
+                        listaPosts.get(i).getDescripcion(), listaPosts.get(i).getImagen()));
+
+        } catch (SQLException e) {
+
+        }
+        return transferPosts;
     }
 
 }

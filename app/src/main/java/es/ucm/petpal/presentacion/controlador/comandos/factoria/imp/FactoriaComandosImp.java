@@ -9,7 +9,9 @@ import es.ucm.petpal.presentacion.controlador.comandos.imp.ConsultarUsuarioNuevo
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearPostComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.CrearUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.EditarUsuarioComando;
+import es.ucm.petpal.presentacion.controlador.comandos.imp.HayUsuarioComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerAyudaComando;
+import es.ucm.petpal.presentacion.controlador.comandos.imp.VerPostsComando;
 import es.ucm.petpal.presentacion.controlador.comandos.imp.VerWebViewComando;
 
 /**
@@ -43,6 +45,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
             case ListaComandos.CONSULTAR_USUARIO_NUEVO_POST:
                 ret = new ConsultarUsuarioNuevoPostComando();
+                break;
+            case ListaComandos.VER_POSTS:
+                ret = new VerPostsComando();
+                break;
+            case ListaComandos.HAY_USUARIO:
+                ret = new HayUsuarioComando();
                 break;
         }
 

@@ -151,7 +151,7 @@ public class Registro extends Activity {
     }
 
     public void volverDecision(View v){
-        startActivity(new Intent(this, Decision.class));
+        startActivity(new Intent(this, Acceso.class));
     }
 
     private boolean datosValidos(String nombre, String pass, String correo, String telefono) {

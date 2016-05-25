@@ -40,6 +40,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/iconoAyuda"
+                    android:src="@drawable/ayuda"
+                    android:scaleType="fitCenter"
+                    android:onClick="ayuda"
                     android:layout_gravity="center" />
 
             </LinearLayout>
@@ -52,6 +55,45 @@
                 android:id="@+id/cuerpo"
                 android:layout_below="@+id/cabecera"
                 android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Mis posts"
+                    android:id="@+id/verPostUser"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/listViewPosts"
+                    android:layout_weight="6"
+                    android:choiceMode="singleChoice"
+                    android:gravity="center"
+                    android:isScrollContainer="true"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="No has realizado ningun post todavia"
+                    android:id="@+id/textoListadoVacio"
+                    android:visibility="gone"
+                    android:textStyle="italic"
+                    android:gravity="center"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"></LinearLayout>
 
             </LinearLayout>
 </RelativeLayout>

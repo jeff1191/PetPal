@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <uses-feature
@@ -32,7 +35,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentacion.vista.Decision" />
+        <activity android:name=".presentacion.vista.Acceso"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity android:name=".presentacion.vista.MainActivity" />
 
@@ -51,23 +56,14 @@
 
         <activity android:name=".presentacion.vista.VerPosts" />
 
-        <activity android:name=".presentacion.vista.Acceso" />
+        <activity android:name=".presentacion.vista.InicioSesion" />
+
+        <activity android:name=".presentacion.vista.Decision" />
 
         <activity android:name=".presentacion.vista.Registro"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-
-        <service
-            android:name=".presentacion.notificaciones.ServicioNotificaciones"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":servicio_notificaciones" />
-
-        <receiver android:name=".presentacion.notificaciones.CargarNotificaciones" />
-        <receiver android:name=".presentacion.notificaciones.GestorRespuestas" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionAlarma" />
-        <receiver android:name=".presentacion.notificaciones.NotificacionPregunta" />
     </application>
 
 </manifest>

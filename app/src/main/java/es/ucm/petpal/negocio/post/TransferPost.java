@@ -20,6 +20,15 @@ public class TransferPost {
 
     public TransferPost(){    }
 
+    public TransferPost(Integer id, Date fecha, String titulo, String ubicacion, String descripcion, String imagen) {
+        this.id = id;
+        this.fecha = fecha;
+        this.titulo = titulo;
+        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -1,7 +1,6 @@
 package es.ucm.petpal.presentacion.vista;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
  */
 public class Ayuda extends Activity{
     ImageViewTouch mImage;
+    private String pantalla;
 
     protected void onCreate(Bundle savedInstanceState) {
         cargarTema();
@@ -25,7 +25,7 @@ public class Ayuda extends Activity{
         setContentView(R.layout.activity_ayuda);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String pantalla = bundle.getString("pantalla");
+            pantalla = bundle.getString("pantalla");
             mImage = (ImageViewTouch) findViewById(R.id.imageView);
 
             mImage.setSingleTapListener(
@@ -68,13 +68,15 @@ public class Ayuda extends Activity{
                 case "nuevoPost":
                     mImage.setImageResource(R.drawable.ayuda_main);
                     break;
+                case "verPosts":
+                    mImage.setImageResource(R.drawable.ayuda_main);
+                    break;
             }
         }
     }
 
     public void volver(View v){
-        Intent pantallaPrincipal = new Intent (getApplicationContext(), MainActivity.class);
-        startActivity(pantallaPrincipal);
+        finish();
     }
 
     public void cargarTema(){
