@@ -123,7 +123,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Crear publicacion"
+                    android:text="Crear post"
                     android:id="@+id/button2"
                     android:onClick="nuevoPost"
                     android:clickable="true"

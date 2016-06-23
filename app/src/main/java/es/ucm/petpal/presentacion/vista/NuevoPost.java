@@ -356,7 +356,7 @@ public class NuevoPost extends Activity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("obtenerIDUsuarioServer", "Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
+                        "Error al subirlo al servidor", Toast.LENGTH_SHORT).show();
             }
         });
 

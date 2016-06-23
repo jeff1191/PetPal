@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="fill_parent">
+    android:layout_height="110dp"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:id="@+id/imagePostList"
+        android:scaleType="fitXY"
         android:layout_weight="1.5" />
 
     <LinearLayout
@@ -43,8 +47,9 @@
                     android:paddingRight="20dp"
                     android:id="@+id/tituloPostList"
                     android:focusable="false"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                    android:gravity="center_vertical">
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp">
                 </TextView>
                 <TextView
                     android:layout_width="match_parent"
@@ -53,8 +58,9 @@
                     android:paddingRight="20dp"
                     android:id="@+id/ciudadPostList"
                     android:focusable="false"
-                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                    android:gravity="center_vertical">
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp">
                 </TextView>
 
             </LinearLayout>

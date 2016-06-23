@@ -88,6 +88,11 @@ public class InicioSesion extends Activity{
                         acceso = true;
 
                         Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, accesoUsuario);
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),
+                                        "Inicio de sesión completado con éxito", Toast.LENGTH_SHORT);
+
+                        toast1.show();
                         startActivity(new Intent(Contexto.getInstancia().getContext(), MainActivity.class));
 
                     } catch (JSONException e) {
@@ -103,7 +108,7 @@ public class InicioSesion extends Activity{
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
                     Toast.makeText(getApplicationContext(),
-                            error.getMessage(), Toast.LENGTH_SHORT).show();
+                            "Error al iniciar sesion", Toast.LENGTH_SHORT).show();
                 }
             });
 

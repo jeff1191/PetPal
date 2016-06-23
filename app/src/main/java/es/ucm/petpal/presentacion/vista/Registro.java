@@ -16,7 +16,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,8 +99,6 @@ public class Registro extends Activity {
         map.put("email", crearUsuario.getEmail());
         map.put("contrasenya", pass);
 
-
-
         // Crear nuevo objeto Json basado en el mapa
         JSONObject jobject = new JSONObject(map);
 
@@ -121,6 +118,11 @@ public class Registro extends Activity {
                                 ret=true;
                                 Log.d("NUEVO_USUARIO_RESPUESTA", response.toString());
                                 Controlador.getInstancia().ejecutaComando(ListaComandos.CREAR_USUARIO, crearUsuario);
+                                Toast toast1 =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Registro completado con éxito", Toast.LENGTH_SHORT);
+
+                                toast1.show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                         },
@@ -129,6 +131,11 @@ public class Registro extends Activity {
                             public void onErrorResponse(VolleyError error) {
                                 ret=false;
                                 Log.d("NUEVO_USUARIO_ERROR", error.toString());
+                                Toast toast1 =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Error en el registro", Toast.LENGTH_SHORT);
+
+                                toast1.show();
                             }
                         }
 

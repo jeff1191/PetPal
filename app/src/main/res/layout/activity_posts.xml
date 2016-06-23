@@ -73,7 +73,7 @@
                     android:layout_weight="6"
                     android:choiceMode="singleChoice"
                     android:gravity="center"
-                    android:isScrollContainer="true"
+                    android:isScrollContainer="false"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:visibility="visible" />

@@ -48,13 +48,19 @@
 
         <activity android:name=".presentacion.vista.Ayuda" />
 
-        <activity android:name=".presentacion.vista.NuevoPost" />
+        <activity
+            android:name=".presentacion.vista.NuevoPost"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity android:name=".presentacion.vista.PetPalWebView" />
 
         <activity android:name=".presentacion.vista.VerPerfil" />
 
-        <activity android:name=".presentacion.vista.VerPosts" />
+        <activity
+            android:name=".presentacion.vista.VerPosts"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
         <activity android:name=".presentacion.vista.InicioSesion" />
 
