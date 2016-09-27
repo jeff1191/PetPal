@@ -8,7 +8,7 @@ La aplicación tiene dos partes fundamentales en cuanto a su arquitectura, una e
 - Para la WebView primero la enlazamos a una página php en el servidor   y después utilizamos peticiones GET, POST con AJAX/JQueryMobile. Una vez que obtenemos la información utilizamos una vez más JQueryMobile para mostrar resultados dependiendo de lo que nos ha devuelto el  correspondiente archivo php, esto  depende del evento que ha generado el usuario desde la interfaz gráfica.
 Para enviar peticiones en Android utilizamos la librería Volley desarrollada por Google para optimizar el envío de peticiones Http desde los dispositivos hacia servidores externos, la comunicación lo hace a través de JSON(JavaScript Object Notation), que es un formato ligero para el intercambio de datos. En la figura 12 se muestra un esquema general de la librería Volley.
 
-![Alt text](https://lh3.googleusercontent.com/XHfMV2JldJTvICSmcQOZFFJKWv0RE1qcgHeet5bXgK9eVLvMEg7HYmiOcoreUH5m0iyYo5kcJ0k0UwY=w1366-h585?raw=true "Web/Volley")
+![Alt text](https://s11.postimg.org/apjvw0uk3/Pet_Pal_web.png?raw=true "Web/Volley")
 
 - En cuanto a la estructura de la aplicación nativa de Android hemos utilizado la arquitectura multicapa, ya que nos proporciona integración y reusabilidad, encapsulación, distribución, escalabilidad, manejabilidad, mejora el rendimiento y mejora la fiabilidad.
 
@@ -18,4 +18,4 @@ Para enviar peticiones en Android utilizamos la librería Volley desarrollada po
   La capa de integración es responsable de la comunicación con recursos y sistemas externos. Normalmente está formada por uno o más gestores de bases de datos.
 
 
-![Alt text](https://lh5.googleusercontent.com/6JOaNJY7l82h0D3cCtxMwkYfiU9HwvXQW4Ie3iOMI0fbwvR_kfyBAHS19CxGXIZ1tBBMYLzlkRspBf4=w1366-h585?raw=true "Arquitectura multicapa")
+![Alt text](https://s11.postimg.org/6ughtgbeb/petpal_nativa.png?raw=true "Arquitectura multicapa PetPal")
